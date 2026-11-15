@@ -1,0 +1,54 @@
+# Tests and lint on every push and pull request.
+#
+# Database tests run against a throwaway Postgres (with pgvector) started for
+# this job. Tests marked `neon` need Neon-only extensions (lakebase_text) and
+# are skipped here; run them locally against the Neon test branch.
+# No secrets are used.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Lint and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        # pgvector/pgvector:pg17, pinned by digest (checked 2026-11-14)
+        image: pgvector/pgvector@sha256:b513c48566e4777cd3370451400000c78eda6a08131d68f4c31d4a76f27bd8fd
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+      - name: Install
+        run: uv sync --locked
+      - name: Lint
+        run: uv run ruff check .
+      - name: Formatting
+        run: uv run ruff format --check .
+      - name: Set up the test database
+        # A throwaway password for a throwaway database; not a secret.
+        run: |
+          echo "DATABASE_URL=postgresql://postgres:postgres@localhost:5432/postgres" > .env.test
+          uv run --env-file .env.test python migrations/migrate.py
+          uv run python migrations/logins.py --env-file .env.test
+      - name: Tests
+        run: uv run pytest -q -rs
