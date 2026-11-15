@@ -10,7 +10,7 @@ import psycopg
 import pytest
 
 from core.db import connect, to_vector
-from core.search import bm25_search, vector_search
+from core.search import bm25_search, hybrid_search, vector_search
 from scripts.spike_data import PASSAGES, hashed_vector
 
 VERSION = "test-v1"
@@ -137,3 +137,33 @@ class TestBm25Search:
         scores = [h.score for h in hits]
         assert scores and scores[0] < 0
         assert scores == sorted(scores)
+
+
+# --- Hybrid search (needs BM25, so Neon only) ---------------------------------
+
+
+@pytest.mark.neon
+class TestHybridSearch:
+    def test_found_by_both_searches_ranks_first(self, seeded):
+        question = "Who died at Utica rather than accept a pardon?"
+        with connect("query") as conn:
+            hits = hybrid_search(
+                conn, question, hashed_vector(question), corpus_version=VERSION, k=3
+            )
+        top = hits[0]
+        assert top.life == "Cato the Younger"
+        assert top.bm25_rank == 1 and top.vector_rank == 1
+        assert hits == sorted(hits, key=lambda h: -h.rrf_score)
+
+    def test_a_chunk_only_one_search_finds_is_still_returned(self, seeded):
+        # No passage contains "Hannibal": BM25 finds nothing, vector still ranks.
+        question = "Hannibal"
+        with connect("query") as conn:
+            hits = hybrid_search(
+                conn,
+                question,
+                hashed_vector("Spartacus revolt"),
+                corpus_version=VERSION,
+            )
+        assert hits and all(h.bm25_rank is None for h in hits)
+        assert hits[0].life == "Crassus"

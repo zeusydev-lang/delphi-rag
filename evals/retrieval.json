@@ -1,0 +1,518 @@
+{
+  "about": "Retrieval eval for delphi-rag. Each question lists the (life, section) pairs that count as correct for corpus lives-v1; `evidence` is an exact quote from one of them, checked by tests/test_retrieval_eval.py. Questions written 2026-11-15 from the Gutenberg #674 text. `answer_life` (optional) names the Life the answer is about when `expected` also includes another Life's retelling; life@1 counts a top hit from answer_life or any expected section.",
+  "corpus_version": "lives-v1",
+  "questions": [
+    {
+      "id": "nm01",
+      "category": "near_miss",
+      "question": "Which of the Gracchi was beaten to death with clubs and pieces of benches?",
+      "expected": [
+        {
+          "life": "Tiberius Gracchus",
+          "section": 24
+        }
+      ],
+      "evidence": "killed by clubs and staves only, none by an iron weapon"
+    },
+    {
+      "id": "nm02",
+      "category": "near_miss",
+      "question": "Which brother was killed on the Capitol?",
+      "expected": [
+        {
+          "life": "Tiberius Gracchus",
+          "section": 24
+        },
+        {
+          "life": "Tiberius Gracchus",
+          "section": 25
+        },
+        {
+          "life": "Caius Gracchus",
+          "section": 19
+        }
+      ],
+      "evidence": "killed by clubs and staves only",
+      "answer_life": "Tiberius Gracchus",
+      "note": "Caius s19 also says this about Tiberius, so it counts as a hit; life@1 still wants Tiberius."
+    },
+    {
+      "id": "nm03",
+      "category": "near_miss",
+      "question": "Which Gracchus hid in a grove sacred to the Furies before he was killed?",
+      "expected": [
+        {
+          "life": "Caius Gracchus",
+          "section": 23
+        }
+      ],
+      "evidence": "grove, consecrated to the Furies"
+    },
+    {
+      "id": "nm04",
+      "category": "near_miss",
+      "question": "Which Gracchus had his fellow tribune Octavius deprived of his office?",
+      "expected": [
+        {
+          "life": "Tiberius Gracchus",
+          "section": 17
+        },
+        {
+          "life": "Tiberius Gracchus",
+          "section": 18
+        },
+        {
+          "life": "Tiberius Gracchus",
+          "section": 19
+        }
+      ],
+      "evidence": "proposed to deprive Octavius of his tribuneship"
+    },
+    {
+      "id": "nm05",
+      "category": "near_miss",
+      "question": "Which Gracchus passed a law to sell corn to the poor at a lower price?",
+      "expected": [
+        {
+          "life": "Caius Gracchus",
+          "section": 8
+        }
+      ],
+      "evidence": "a fourth related to the price of corn"
+    },
+    {
+      "id": "nm06",
+      "category": "near_miss",
+      "question": "Whose body was thrown into the river with the other corpses after he was killed?",
+      "expected": [
+        {
+          "life": "Tiberius Gracchus",
+          "section": 25
+        },
+        {
+          "life": "Caius Gracchus",
+          "section": 19
+        }
+      ],
+      "evidence": "the other corpses, into the river",
+      "answer_life": "Tiberius Gracchus",
+      "note": "Caius s19 also says this about Tiberius, so it counts as a hit; life@1 still wants Tiberius."
+    },
+    {
+      "id": "nm07",
+      "category": "near_miss",
+      "question": "What happened to Caius Gracchus's head after he was killed?",
+      "expected": [
+        {
+          "life": "Caius Gracchus",
+          "section": 24
+        }
+      ],
+      "evidence": "when Caius's head was cut off"
+    },
+    {
+      "id": "nm08",
+      "category": "near_miss",
+      "question": "Which Cato kept saying that Carthage ought to be destroyed?",
+      "expected": [
+        {
+          "life": "Cato the Elder",
+          "section": 34
+        },
+        {
+          "life": "Cato the Elder",
+          "section": 35
+        }
+      ],
+      "evidence": "Carthage, methinks, ought utterly to be destroyed"
+    },
+    {
+      "id": "nm09",
+      "category": "near_miss",
+      "question": "How did Cato die at Utica?",
+      "expected": [
+        {
+          "life": "Cato the Younger",
+          "section": 89
+        },
+        {
+          "life": "Cato the Younger",
+          "section": 90
+        },
+        {
+          "life": "Cato the Younger",
+          "section": 93
+        }
+      ],
+      "evidence": "stabbed it into his breast"
+    },
+    {
+      "id": "nm10",
+      "category": "near_miss",
+      "question": "Which Cato read Plato's dialogue on the soul on the night he died?",
+      "expected": [
+        {
+          "life": "Cato the Younger",
+          "section": 89
+        }
+      ],
+      "evidence": "Plato's dialogue concerning the soul"
+    },
+    {
+      "id": "nm11",
+      "category": "near_miss",
+      "question": "Which Cato studied with Antipater the Stoic?",
+      "expected": [
+        {
+          "life": "Cato the Younger",
+          "section": 8
+        }
+      ],
+      "evidence": "Antipater the Tyrian, the Stoic philosopher"
+    },
+    {
+      "id": "nm12",
+      "category": "near_miss",
+      "question": "Which Cato sold his slaves when they grew old?",
+      "expected": [
+        {
+          "life": "Cato the Elder",
+          "section": 8
+        }
+      ],
+      "evidence": "selling them in their old age"
+    },
+    {
+      "id": "nm13",
+      "category": "near_miss",
+      "question": "Which Cato's censorship pleased the people so much that they set up a statue to him?",
+      "expected": [
+        {
+          "life": "Cato the Elder",
+          "section": 24
+        }
+      ],
+      "evidence": "liked his censorship wondrously well"
+    },
+    {
+      "id": "n01",
+      "category": "named",
+      "question": "How did Crassus defeat Spartacus?",
+      "expected": [
+        {
+          "life": "Crassus",
+          "section": 9
+        },
+        {
+          "life": "Crassus",
+          "section": 10
+        },
+        {
+          "life": "Crassus",
+          "section": 11
+        }
+      ],
+      "evidence": "Of twelve thousand three hundred whom he killed"
+    },
+    {
+      "id": "n02",
+      "category": "named",
+      "question": "What did Surena do with the head and hand of Crassus?",
+      "expected": [
+        {
+          "life": "Crassus",
+          "section": 31
+        }
+      ],
+      "evidence": "Surena sent the head and hand of Crassus"
+    },
+    {
+      "id": "n03",
+      "category": "named",
+      "question": "What did Caesar do when he reached the Rubicon?",
+      "expected": [
+        {
+          "life": "Caesar",
+          "section": 31
+        }
+      ],
+      "evidence": "When he came to the river Rubicon"
+    },
+    {
+      "id": "n04",
+      "category": "named",
+      "question": "How much ransom did the pirates first ask from Caesar?",
+      "expected": [
+        {
+          "life": "Caesar",
+          "section": 2
+        }
+      ],
+      "evidence": "demanded of him twenty talents for his ransom"
+    },
+    {
+      "id": "n05",
+      "category": "named",
+      "question": "How long did it take Pompey to clear the seas of pirates?",
+      "expected": [
+        {
+          "life": "Pompey",
+          "section": 33
+        }
+      ],
+      "evidence": "in the space of three months"
+    },
+    {
+      "id": "n06",
+      "category": "named",
+      "question": "Who struck Caesar first when he was assassinated?",
+      "expected": [
+        {
+          "life": "Caesar",
+          "section": 67
+        }
+      ],
+      "evidence": "Casca gave him the first cut"
+    },
+    {
+      "id": "n07",
+      "category": "named",
+      "question": "How did Crassus make his fortune?",
+      "expected": [
+        {
+          "life": "Crassus",
+          "section": 2
+        }
+      ],
+      "evidence": "he got by fire and rapine"
+    },
+    {
+      "id": "n08",
+      "category": "named",
+      "question": "What was done to Pompey's body in Egypt?",
+      "expected": [
+        {
+          "life": "Pompey",
+          "section": 106
+        }
+      ],
+      "evidence": "cut off Pompey's head, and threw the rest of his body overboard"
+    },
+    {
+      "id": "p01",
+      "category": "paraphrase",
+      "question": "Which young Roman, captured by sea raiders, laughed at the price they put on him?",
+      "expected": [
+        {
+          "life": "Caesar",
+          "section": 2
+        }
+      ],
+      "evidence": "twenty talents for his ransom"
+    },
+    {
+      "id": "p02",
+      "category": "paraphrase",
+      "question": "Why did a young tribune want public land returned to poor citizens?",
+      "expected": [
+        {
+          "life": "Tiberius Gracchus",
+          "section": 12
+        },
+        {
+          "life": "Tiberius Gracchus",
+          "section": 13
+        },
+        {
+          "life": "Tiberius Gracchus",
+          "section": 14
+        }
+      ],
+      "evidence": "reinstate the poor citizens in their former possessions"
+    },
+    {
+      "id": "p03",
+      "category": "paraphrase",
+      "question": "Which servant killed his master and then himself so the enemies would not take him alive?",
+      "expected": [
+        {
+          "life": "Caius Gracchus",
+          "section": 23
+        }
+      ],
+      "evidence": "his servant Philocrates having first slain him"
+    },
+    {
+      "id": "p04",
+      "category": "paraphrase",
+      "question": "Which general swept the raiders off the whole sea in a single season?",
+      "expected": [
+        {
+          "life": "Pompey",
+          "section": 30
+        },
+        {
+          "life": "Pompey",
+          "section": 33
+        }
+      ],
+      "evidence": "in the space of three months"
+    },
+    {
+      "id": "p05",
+      "category": "paraphrase",
+      "question": "Who chose to die rather than accept mercy from the man who won the civil war?",
+      "expected": [
+        {
+          "life": "Cato the Younger",
+          "section": 89
+        },
+        {
+          "life": "Cato the Younger",
+          "section": 90
+        },
+        {
+          "life": "Cato the Younger",
+          "section": 93
+        }
+      ],
+      "evidence": "stabbed it into his breast"
+    },
+    {
+      "id": "p06",
+      "category": "paraphrase",
+      "question": "Which old statesman ended every speech by demanding that Rome's great rival city be wiped out?",
+      "expected": [
+        {
+          "life": "Cato the Elder",
+          "section": 35
+        }
+      ],
+      "evidence": "Carthage, methinks, ought utterly to be destroyed"
+    },
+    {
+      "id": "p07",
+      "category": "paraphrase",
+      "question": "Whose mother bore the loss of both her sons with a noble spirit?",
+      "expected": [
+        {
+          "life": "Caius Gracchus",
+          "section": 27
+        }
+      ],
+      "evidence": "bore the loss of her two sons with a noble and undaunted spirit"
+    },
+    {
+      "id": "p08",
+      "category": "paraphrase",
+      "question": "Who made peace between the two most powerful men in Rome so that both would back him?",
+      "expected": [
+        {
+          "life": "Caesar",
+          "section": 12
+        }
+      ],
+      "evidence": "reconciling of Crassus and Pompey"
+    },
+    {
+      "id": "sh01",
+      "category": "shared",
+      "question": "What happened at the battle of Pharsalia?",
+      "expected": [
+        {
+          "life": "Caesar",
+          "section": 41
+        },
+        {
+          "life": "Caesar",
+          "section": 42
+        },
+        {
+          "life": "Caesar",
+          "section": 43
+        },
+        {
+          "life": "Caesar",
+          "section": 44
+        },
+        {
+          "life": "Pompey",
+          "section": 90
+        },
+        {
+          "life": "Pompey",
+          "section": 94
+        },
+        {
+          "life": "Pompey",
+          "section": 95
+        },
+        {
+          "life": "Pompey",
+          "section": 96
+        }
+      ],
+      "evidence": "When the two armies were come into Pharsalia"
+    },
+    {
+      "id": "sh02",
+      "category": "shared",
+      "question": "What did Pompey do when his army broke at Pharsalia?",
+      "expected": [
+        {
+          "life": "Pompey",
+          "section": 95
+        },
+        {
+          "life": "Pompey",
+          "section": 96
+        },
+        {
+          "life": "Pompey",
+          "section": 97
+        }
+      ],
+      "evidence": "he went into his own tent, and sat down, speechless"
+    },
+    {
+      "id": "sh03",
+      "category": "shared",
+      "question": "What did Caesar and Cato argue about in the senate during Catiline's conspiracy?",
+      "expected": [
+        {
+          "life": "Caesar",
+          "section": 7
+        },
+        {
+          "life": "Caesar",
+          "section": 8
+        },
+        {
+          "life": "Cato the Younger",
+          "section": 33
+        },
+        {
+          "life": "Cato the Younger",
+          "section": 34
+        }
+      ],
+      "evidence": "Cato intimated in his speech the suspicion of Caesar himself"
+    },
+    {
+      "id": "sh04",
+      "category": "shared",
+      "question": "Whose support won Caesar his first consulship?",
+      "expected": [
+        {
+          "life": "Caesar",
+          "section": 12
+        },
+        {
+          "life": "Caesar",
+          "section": 13
+        }
+      ],
+      "evidence": "doubly supported by the interests of Crassus and Pompey"
+    }
+  ]
+}
