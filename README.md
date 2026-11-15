@@ -40,7 +40,13 @@ an expected passage, the main citation is from the right Life 97% of the time
 declined. $0.022 for 38 questions. Details in the
 [operations guide](docs/OPERATIONS.md#answers-agentanswerpy).
 
-Cache eval results: TODO.
+**Semantic cache** (48 labelled question pairs, 10 of them held out):
+**0 false hits**, meaning no question was served another question's answer,
+and 86–100% of true paraphrases were served from the cache. A cheap
+names/ordinals/numbers check stops near-misses like Cato the Elder vs the
+Younger (0.969 similar) before any model is asked; a small judge decides the
+gray zone. Its first prompt let one false hit through ("asked" vs "promised"
+to pay the pirates); the fix was checked on pairs written before it.
 
 ## Key decisions
 

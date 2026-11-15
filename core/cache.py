@@ -18,7 +18,7 @@ HIT_AT = 0.95  # at or above, with the same signature: serve the cached answer
 MISS_BELOW = 0.85  # below: answer fresh; in between: ask the judge
 CANDIDATES = 5  # nearest cached questions considered per lookup
 # Saved with cache eval results. Change it when the gate's rules change.
-CACHE_VERSION = "c1"
+CACHE_VERSION = "c2"  # c2: judge prompt j2
 
 
 class Versions(BaseModel):

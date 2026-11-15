@@ -23,7 +23,9 @@ from agent.structured import generate_structured
 from core.cache import HIT_AT, MISS_BELOW
 from core.signature import signature
 
-JUDGE_PROMPT_VERSION = "j1"
+# j1 -> j2 (2026-11-15): j1 assumed "asked" and "promised to pay" named the
+# same sum (Plutarch: 20 talents asked, 50 promised) and served a false hit.
+JUDGE_PROMPT_VERSION = "j2"
 DEFAULT_JUDGE_MODEL = "anthropic/claude-haiku-5-5"
 
 Outcome = Literal[
@@ -57,6 +59,7 @@ different questions:
 Gracchus; Cato the Elder vs Cato the Younger);
 - a different event, time, place, number or ordinal (first vs second consulship);
 - asking for something different about the same event (how vs why, who vs when);
+- a different action, role or direction, even about the same thing: asked vs offered, promised vs paid, lost vs had, gave vs received. Don't assume two actions refer to the same fact; you can't check the text;
 - one question being broader or narrower than the other.
 
 When unsure, answer false: a wrong match gives someone the wrong answer, while \

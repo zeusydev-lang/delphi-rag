@@ -1,0 +1,127 @@
+{
+  "cache_version": "c1",
+  "hit_at": 0.95,
+  "miss_below": 0.85,
+  "judge_prompt_version": "j1",
+  "judge_model": "anthropic/claude-haiku-5-5",
+  "embedding_model": "voyage/voyage-3.5",
+  "pair_set": "heldout",
+  "labels": "1",
+  "measured_at": "2026-11-15T22:39:40+00:00",
+  "cost_usd": 0.001044,
+  "pairs": 10,
+  "false_hits": 0,
+  "hit_rate_on_paraphrases": 1.0,
+  "judge_calls": 7,
+  "outcomes": {
+    "judged_different": 4,
+    "miss_low_similarity": 1,
+    "miss_signature": 1,
+    "hit": 1,
+    "judged_same": 3
+  },
+  "results": [
+    {
+      "id": "h01",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.9458,
+      "outcome": "judged_different",
+      "served": false,
+      "differences": [],
+      "judge_reason": "The questions ask in opposite directions of the same exchange (what pirates gave Caesar vs. what Caesar gave pirates), so their answers differ."
+    },
+    {
+      "id": "h02",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.9036,
+      "outcome": "judged_different",
+      "served": false,
+      "differences": [],
+      "judge_reason": "Question A asks about Pompey's marriage preceding Julia (Antistia), while Question B asks about his marriage after Julia's death (Cornelia Metella); different spouses and time frames."
+    },
+    {
+      "id": "h03",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.8654,
+      "outcome": "judged_different",
+      "served": false,
+      "differences": [],
+      "judge_reason": "The questions ask for different things: \"asked from\" seeks what Cato requested, while \"refused from\" seeks what Cato turned down; these would have different answers."
+    },
+    {
+      "id": "h04",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.7605,
+      "outcome": "miss_low_similarity",
+      "served": false,
+      "differences": [],
+      "judge_reason": ""
+    },
+    {
+      "id": "h05",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.8624,
+      "outcome": "judged_different",
+      "served": false,
+      "differences": [],
+      "judge_reason": "The questions ask about opposite time periods (after versus before crossing the Rubicon), so their answers would differ."
+    },
+    {
+      "id": "h06",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.8735,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Caesar, Pharsalia vs Pharsalia, Pompey"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "h07",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.9604,
+      "outcome": "hit",
+      "served": true,
+      "differences": [],
+      "judge_reason": ""
+    },
+    {
+      "id": "h08",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.9228,
+      "outcome": "judged_same",
+      "served": true,
+      "differences": [],
+      "judge_reason": "Both ask how Caesar got free from the pirates who captured him, which is the same event and the same asked-for information (the method of escape), just worded differently."
+    },
+    {
+      "id": "h09",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.9437,
+      "outcome": "judged_same",
+      "served": true,
+      "differences": [],
+      "judge_reason": "Both ask for the same content: what Cornelia (mother of the Gracchi) said about her sons; \"told people\" versus \"said\" is only a rewording."
+    },
+    {
+      "id": "h10",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.9228,
+      "outcome": "judged_same",
+      "served": true,
+      "differences": [],
+      "judge_reason": "Both questions ask for the same fact: the location where Pompey was killed/died (Pelusium, near Egypt), just worded differently."
+    }
+  ]
+}

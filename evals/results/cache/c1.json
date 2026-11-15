@@ -1,0 +1,444 @@
+{
+  "cache_version": "c1",
+  "hit_at": 0.95,
+  "miss_below": 0.85,
+  "judge_prompt_version": "j1",
+  "judge_model": "anthropic/claude-haiku-5-5",
+  "embedding_model": "voyage/voyage-3.5",
+  "labels": "1",
+  "measured_at": "2026-11-15T22:30:36+00:00",
+  "cost_usd": 0.001688,
+  "pairs": 38,
+  "false_hits": 1,
+  "hit_rate_on_paraphrases": 0.857,
+  "judge_calls": 11,
+  "outcomes": {
+    "judged_same": 7,
+    "hit": 6,
+    "miss_signature": 20,
+    "judged_different": 4,
+    "miss_low_similarity": 1
+  },
+  "results": [
+    {
+      "id": "pa01",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.9365,
+      "outcome": "judged_same",
+      "served": true,
+      "differences": [],
+      "judge_reason": "Both ask for the same information: the manner of Crassus's death (his execution by the Parthians with molten gold, as described in Plutarch's Life of Crassus), just phrased differently."
+    },
+    {
+      "id": "pa02",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.9759,
+      "outcome": "hit",
+      "served": true,
+      "differences": [],
+      "judge_reason": ""
+    },
+    {
+      "id": "pa03",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.945,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "ordinals: none vs 1"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "pa04",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.9804,
+      "outcome": "hit",
+      "served": true,
+      "differences": [],
+      "judge_reason": ""
+    },
+    {
+      "id": "pa05",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.8942,
+      "outcome": "judged_same",
+      "served": true,
+      "differences": [],
+      "judge_reason": "Both ask the same thing: who delivered the first blow in Caesar's assassination; the wording differs only trivially."
+    },
+    {
+      "id": "pa06",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.9592,
+      "outcome": "hit",
+      "served": true,
+      "differences": [],
+      "judge_reason": ""
+    },
+    {
+      "id": "pa07",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.8551,
+      "outcome": "judged_same",
+      "served": true,
+      "differences": [],
+      "judge_reason": "Cato of Utica and Cato the Younger are the same person (Marcus Porcius Cato Uticensis), so one answer about his death fully answers both."
+    },
+    {
+      "id": "pa08",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.953,
+      "outcome": "hit",
+      "served": true,
+      "differences": [],
+      "judge_reason": ""
+    },
+    {
+      "id": "pa09",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.988,
+      "outcome": "hit",
+      "served": true,
+      "differences": [],
+      "judge_reason": ""
+    },
+    {
+      "id": "pa10",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.9713,
+      "outcome": "hit",
+      "served": true,
+      "differences": [],
+      "judge_reason": ""
+    },
+    {
+      "id": "pa11",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.9156,
+      "outcome": "judged_same",
+      "served": true,
+      "differences": [],
+      "judge_reason": "Both questions ask the same thing: the means by which Crassus acquired his wealth, differing only in wording (\"become so rich\" vs \"make his fortune\")."
+    },
+    {
+      "id": "pa12",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.9436,
+      "outcome": "judged_same",
+      "served": true,
+      "differences": [],
+      "judge_reason": "Both ask about the same thing: the treatment of Pompey's body after his death in Egypt; different wording only."
+    },
+    {
+      "id": "pa13",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.907,
+      "outcome": "judged_same",
+      "served": true,
+      "differences": [],
+      "judge_reason": "\"Made peace between\" and \"reconciled\" are rewordings asking for the same person who brought Crassus and Pompey together, so one answer covers both."
+    },
+    {
+      "id": "pa14",
+      "kind": "paraphrase",
+      "same": true,
+      "similarity": 0.9346,
+      "outcome": "judged_different",
+      "served": false,
+      "differences": [],
+      "judge_reason": "Question A says \"Marcus Cato\" without specifying which Cato, while Question B specifies Cato the Elder; a stored answer about one could be wrong for the other, so they are not clearly the same question."
+    },
+    {
+      "id": "nm01",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.8486,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Caius Gracchus vs Tiberius Gracchus"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "nm02",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.8734,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Caius Gracchus vs Tiberius Gracchus"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "nm03",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.9688,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Cato the Younger vs Cato the Elder"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "nm04",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.9618,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Caesar, Cato the Elder vs Caesar, Cato the Younger"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "nm05",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.8447,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "ordinals: 2 vs 1"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "nm06",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.8361,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "ordinals: 2 vs 1"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "nm07",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.9446,
+      "outcome": "judged_different",
+      "served": false,
+      "differences": [],
+      "judge_reason": "Question A asks for the younger Gracchus brother and Question B asks for the elder; these have opposite answers (Gaius vs Tiberius), so one answer cannot fully answer both."
+    },
+    {
+      "id": "nm08",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.9101,
+      "outcome": "judged_same",
+      "served": true,
+      "differences": [],
+      "judge_reason": "Both ask for the same figure: the talent sum agreed between Caesar and the pirates in Plutarch's Life of Caesar; \"promised to pay\" and \"asked from\" refer to the same ransom amount."
+    },
+    {
+      "id": "nm09",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.7795,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Crassus, Spartacus vs Crassus, Parthians"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "nm10",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.8124,
+      "outcome": "miss_low_similarity",
+      "served": false,
+      "differences": [],
+      "judge_reason": ""
+    },
+    {
+      "id": "nm11",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.6977,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Cornelia vs Cornelia, Tiberius Gracchus"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "nm12",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.915,
+      "outcome": "judged_different",
+      "served": false,
+      "differences": [],
+      "judge_reason": "One asks the total force Crassus commanded at Carrhae, the other asks the casualties/losses he suffered there; these are different quantities, so one answer cannot fully answer both."
+    },
+    {
+      "id": "nm13",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.8752,
+      "outcome": "judged_different",
+      "served": false,
+      "differences": [],
+      "judge_reason": "One asks why Caesar crossed the Rubicon (motive/reason) while the other asks when (date/time); these are different questions about the same event."
+    },
+    {
+      "id": "nm14",
+      "kind": "near_miss",
+      "same": false,
+      "similarity": 0.6279,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Cato, Tusculum vs Cato, Utica"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "st01",
+      "kind": "same_topic",
+      "same": false,
+      "similarity": 0.5906,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Pompey vs Crassus"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "st02",
+      "kind": "same_topic",
+      "same": false,
+      "similarity": 0.6715,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Pompey vs Caesar"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "st03",
+      "kind": "same_topic",
+      "same": false,
+      "similarity": 0.792,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Caesar vs Pompey"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "st04",
+      "kind": "same_topic",
+      "same": false,
+      "similarity": 0.7454,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Pompey vs Caesar"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "st05",
+      "kind": "same_topic",
+      "same": false,
+      "similarity": 0.6577,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Pompey vs Crassus"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "st06",
+      "kind": "same_topic",
+      "same": false,
+      "similarity": 0.7761,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Caesar, Cato the Younger vs Cato the Younger, Pompey"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "un01",
+      "kind": "unrelated",
+      "same": false,
+      "similarity": 0.3965,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Carthage, Cato vs Crassus"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "un02",
+      "kind": "unrelated",
+      "same": false,
+      "similarity": 0.3833,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Tiberius Gracchus vs Caesar, Rubicon"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "un03",
+      "kind": "unrelated",
+      "same": false,
+      "similarity": 0.2291,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Cornelia vs Pompey"
+      ],
+      "judge_reason": ""
+    },
+    {
+      "id": "un04",
+      "kind": "unrelated",
+      "same": false,
+      "similarity": 0.2639,
+      "outcome": "miss_signature",
+      "served": false,
+      "differences": [
+        "names: Caesar vs Cato, Utica"
+      ],
+      "judge_reason": ""
+    }
+  ]
+}

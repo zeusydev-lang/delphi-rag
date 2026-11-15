@@ -11,9 +11,11 @@ the judge model for gray-zone pairs). No database is needed.
   judge calls  how many pairs needed the model, and what it said.
 
 Usage (needs VOYAGE_API_KEY and ANTHROPIC_API_KEY; well under $0.01):
-    uv run python -m scripts.cache_eval
+    uv run python -m scripts.cache_eval                    # evals/cache_pairs.json
+    uv run python -m scripts.cache_eval --pairs heldout    # evals/cache_pairs_heldout.json
 """
 
+import argparse
 import asyncio
 import json
 import math
@@ -27,7 +29,10 @@ from agent.llm import EmbeddingClient, LlmUsage
 from core.cache import CACHE_VERSION, HIT_AT, MISS_BELOW
 
 ROOT = Path(__file__).resolve().parent.parent
-PAIRS_PATH = ROOT / "evals" / "cache_pairs.json"
+PAIR_SETS = {
+    "main": ROOT / "evals" / "cache_pairs.json",
+    "heldout": ROOT / "evals" / "cache_pairs_heldout.json",
+}
 RESULTS_DIR = ROOT / "evals" / "results" / "cache"
 
 
@@ -50,8 +55,8 @@ def summarise(rows: list[dict]) -> dict:
     }
 
 
-async def run_eval() -> dict:
-    data = json.loads(PAIRS_PATH.read_text(encoding="utf-8"))
+async def run_eval(pair_set: str = "main") -> dict:
+    data = json.loads(PAIR_SETS[pair_set].read_text(encoding="utf-8"))
     pairs = data["pairs"]
     questions = sorted({q for p in pairs for q in (p["a"], p["b"])})
     embedded = await EmbeddingClient(num_retries=0).embed(questions, input_type="query")
@@ -83,6 +88,7 @@ async def run_eval() -> dict:
         "judge_prompt_version": JUDGE_PROMPT_VERSION,
         "judge_model": judge.model,
         "embedding_model": embedded.model,
+        "pair_set": pair_set,
         "labels": data.get("labels", "1"),
         "measured_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "cost_usd": round(usage.cost_usd or 0, 6),
@@ -116,10 +122,14 @@ def print_report(report: dict) -> None:
 
 
 async def main() -> int:
-    report = await run_eval()
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--pairs", choices=sorted(PAIR_SETS), default="main")
+    args = parser.parse_args()
+    report = await run_eval(args.pairs)
     print_report(report)
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    out = RESULTS_DIR / f"{report['cache_version']}.json"
+    suffix = "" if args.pairs == "main" else f"-{args.pairs}"
+    out = RESULTS_DIR / f"{report['cache_version']}{suffix}.json"
     out.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(f"\nSaved {out.relative_to(ROOT)}")
     return 0 if report["false_hits"] == 0 else 1
