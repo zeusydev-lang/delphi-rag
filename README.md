@@ -41,7 +41,8 @@ pytest · Ruff · GitHub Actions
 
 ```text
 agent/        LLM layer (chat + embeddings), structured output, tools
-core/         settings and database connections, one login per job
+core/         settings, database connections (one login per job), corpus parsing and chunking, search
+scripts/      fetch the source text, load the corpus, the Neon spike
 migrations/   SQL schema, database logins and permissions
 tests/        unit tests with fake model servers; database tests
 docs/         operations guide
@@ -60,5 +61,7 @@ TODO
 
 Built by Vijay Kauvangal. Built with Claude Code as a pair-programming partner.
 
-The text is Plutarch's *Lives*, translated by John Dryden and revised by
-Arthur Hugh Clough, from [Project Gutenberg](https://www.gutenberg.org/).
+The text is Plutarch's *Lives* in the translation associated with John Dryden,
+revised by Arthur Hugh Clough: [Project Gutenberg eBook #674](https://www.gutenberg.org/ebooks/674),
+public domain in the USA. The first corpus covers seven Lives: both Catos, both
+Gracchi, Caesar, Pompey and Crassus.

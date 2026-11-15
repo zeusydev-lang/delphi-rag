@@ -91,6 +91,56 @@ uv run pytest
 - CI starts a throwaway Postgres with pgvector, writes its own `.env.test`,
   runs the migrations and logins, then the tests. It uses no secrets.
 
+## Corpus
+
+| | |
+|---|---|
+| Source | Project Gutenberg eBook #674, *Plutarch: Lives of the noble Grecians and Romans*, Dryden's translation as revised by Arthur Hugh Clough ([plain text](https://www.gutenberg.org/ebooks/674.txt.utf-8)) |
+| Pinned SHA-256 | `e849186d3483c1779053a5f70c8ae477316c019907c740f878de0d2c788975f8` (downloaded 2026-11-15) |
+| Version | `lives-v1`, chunker `para-v1` |
+| Lives | Cato the Elder (heading MARCUS CATO), Cato the Younger, Tiberius Gracchus, Caius Gracchus, Caesar, Pompey, Crassus |
+| Size | 470 chunks, 123,739 words |
+
+The Comparison essays (for example *Comparison of Crassus with Nicias*) are
+left out of v1: they bring in people who aren't in the corpus.
+
+### How the text is chunked (`core/corpus.py`)
+
+- The text has **no chapter numbers**. Each Life is a capitalised heading
+  (listed once in the contents and once in the text) followed by paragraphs.
+  A Life ends at the next heading.
+- `section` is the paragraph number within the Life, from 1.
+- Paragraphs under 40 words (verse quotations) join the paragraph before.
+- Paragraphs over 450 words are cut at sentence ends into pieces of about
+  300 words (`chunk_index` 0, 1, ...). A last piece under 100 words joins the
+  one before.
+- Stored `text` is exactly the source's words. What gets **embedded** starts
+  with `Plutarch, Life of <life>, section <n>.`, and the BM25 column indexes
+  the Life's name with the text, because most paragraphs say "he", not the
+  person's name.
+
+### Loading it
+
+```
+uv run python -m scripts.fetch_corpus            # download once, check the hash
+uv run python -m scripts.ingest --dry-run        # chunk counts per Life; no API, no database
+uv run python -m scripts.ingest                  # embed and load into dev (.env)
+```
+
+`ingest` embeds only the chunks the database doesn't already have, one batch
+per transaction, so a second run costs nothing and an interrupted run resumes.
+It stops if the spend passes `DAILY_SPEND_CAP_USD`. `--fake-embeddings` loads
+free hashed vectors under a separate version (`lives-v1-fake`), so they never
+mix with real ones.
+
+### Changing the corpus
+
+Any change to the source file, the Lives or the chunking rules needs a new
+`CORPUS_VERSION` (and a new `CHUNKER` name if the rules changed). `ingest`
+refuses to load an existing version from a different source or chunker, and
+cached answers are keyed to the version, so old answers are never served for
+new text.
+
 ## Search
 
 Two queries in `core/search.py`; lower scores are better for both, but the

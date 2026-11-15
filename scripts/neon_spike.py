@@ -42,7 +42,7 @@ def seed(version: str, vectors: list[list[float]]) -> int:
             cur = conn.execute(
                 """
                 insert into chunks
-                    (corpus_version, life, chapter, chunk_index, text, embedding)
+                    (corpus_version, life, section, chunk_index, text, embedding)
                 values (%s, %s, 1, 0, %s, %s::vector)
                 on conflict do nothing
                 """,
