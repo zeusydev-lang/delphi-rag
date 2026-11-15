@@ -1,0 +1,19 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+private/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Secrets: every env file except the example
+.env
+.env.*
+!.env.example
+
+# Downloaded corpus files (fetched by a script, never committed)
+data/raw/
