@@ -50,6 +50,15 @@ class TestRrf:
         assert rrf({"bm25": [], "vector": []}) == []
         assert [c for c, _, _ in rrf({"bm25": [], "vector": [4, 5]})] == [4, 5]
 
+    def test_weights_scale_each_list(self):
+        (_, s, _), *_ = rrf({"bm25": [3], "vector": [3]}, k=0, weights={"bm25": 0.5})
+        assert s == pytest.approx(0.5 + 1.0)  # unnamed lists weigh 1
+
+    def test_half_weight_bm25_loses_to_an_equal_vector_rank(self):
+        fused = rrf({"bm25": [1], "vector": [2]}, weights={"bm25": 0.5})
+        assert [c for c, _, _ in fused] == [2, 1]
+        assert [c for c, _, _ in rrf({"bm25": [1], "vector": [2]})] == [1, 2]
+
     def test_duplicate_in_one_list_counts_once(self):
         (_, s, ranks), *_ = rrf({"a": [1, 1]})
         assert ranks == {"a": 1} and s == pytest.approx(1 / 61)

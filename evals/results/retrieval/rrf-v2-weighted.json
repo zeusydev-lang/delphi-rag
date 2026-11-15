@@ -1,0 +1,3018 @@
+{
+  "search_version": "rrf-v2-weighted",
+  "corpus_version": "lives-v1",
+  "embedding_model": "voyage/voyage-3.5",
+  "measured_at": "2026-11-15T18:30:59+00:00",
+  "questions": 33,
+  "cost_usd": 2.634e-05,
+  "rates": {
+    "bm25": {
+      "overall": {
+        "hit@1": 0.576,
+        "hit@5": 0.667,
+        "mrr": 0.626,
+        "life@1": 0.879
+      },
+      "by_category": {
+        "named": {
+          "hit@1": 0.5,
+          "hit@5": 0.5,
+          "mrr": 0.521,
+          "life@1": 1.0
+        },
+        "near_miss": {
+          "hit@1": 0.615,
+          "hit@5": 0.769,
+          "mrr": 0.705,
+          "life@1": 0.923
+        },
+        "paraphrase": {
+          "hit@1": 0.625,
+          "hit@5": 0.625,
+          "mrr": 0.625,
+          "life@1": 0.625
+        },
+        "shared": {
+          "hit@1": 0.5,
+          "hit@5": 0.75,
+          "mrr": 0.583,
+          "life@1": 1.0
+        }
+      }
+    },
+    "vector": {
+      "overall": {
+        "hit@1": 0.727,
+        "hit@5": 0.97,
+        "mrr": 0.814,
+        "life@1": 0.848
+      },
+      "by_category": {
+        "named": {
+          "hit@1": 0.625,
+          "hit@5": 1.0,
+          "mrr": 0.792,
+          "life@1": 0.875
+        },
+        "near_miss": {
+          "hit@1": 0.769,
+          "hit@5": 1.0,
+          "mrr": 0.842,
+          "life@1": 0.923
+        },
+        "paraphrase": {
+          "hit@1": 0.75,
+          "hit@5": 1.0,
+          "mrr": 0.823,
+          "life@1": 0.75
+        },
+        "shared": {
+          "hit@1": 0.75,
+          "hit@5": 0.75,
+          "mrr": 0.75,
+          "life@1": 0.75
+        }
+      }
+    },
+    "hybrid": {
+      "overall": {
+        "hit@1": 0.636,
+        "hit@5": 0.879,
+        "mrr": 0.734,
+        "life@1": 0.818
+      },
+      "by_category": {
+        "named": {
+          "hit@1": 0.625,
+          "hit@5": 0.875,
+          "mrr": 0.697,
+          "life@1": 1.0
+        },
+        "near_miss": {
+          "hit@1": 0.692,
+          "hit@5": 0.846,
+          "mrr": 0.777,
+          "life@1": 0.846
+        },
+        "paraphrase": {
+          "hit@1": 0.625,
+          "hit@5": 1.0,
+          "mrr": 0.754,
+          "life@1": 0.625
+        },
+        "shared": {
+          "hit@1": 0.5,
+          "hit@5": 0.75,
+          "mrr": 0.625,
+          "life@1": 0.75
+        }
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "nm01",
+      "category": "near_miss",
+      "bm25": {
+        "top": [
+          [
+            "Caius Gracchus",
+            5
+          ],
+          [
+            "Pompey",
+            12
+          ],
+          [
+            "Tiberius Gracchus",
+            7
+          ],
+          [
+            "Caesar",
+            69
+          ],
+          [
+            "Crassus",
+            33
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.16666666666666666,
+        "life@1": false
+      },
+      "vector": {
+        "top": [
+          [
+            "Tiberius Gracchus",
+            24
+          ],
+          [
+            "Caius Gracchus",
+            5
+          ],
+          [
+            "Tiberius Gracchus",
+            25
+          ],
+          [
+            "Caius Gracchus",
+            26
+          ],
+          [
+            "Caius Gracchus",
+            22
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caius Gracchus",
+            5
+          ],
+          [
+            "Tiberius Gracchus",
+            24
+          ],
+          [
+            "Tiberius Gracchus",
+            24
+          ],
+          [
+            "Tiberius Gracchus",
+            26
+          ],
+          [
+            "Tiberius Gracchus",
+            25
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.5,
+        "life@1": false
+      }
+    },
+    {
+      "id": "nm02",
+      "category": "near_miss",
+      "bm25": {
+        "top": [
+          [
+            "Tiberius Gracchus",
+            25
+          ],
+          [
+            "Tiberius Gracchus",
+            24
+          ],
+          [
+            "Pompey",
+            8
+          ],
+          [
+            "Cato the Younger",
+            68
+          ],
+          [
+            "Caesar",
+            48
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Tiberius Gracchus",
+            25
+          ],
+          [
+            "Caius Gracchus",
+            1
+          ],
+          [
+            "Tiberius Gracchus",
+            24
+          ],
+          [
+            "Tiberius Gracchus",
+            19
+          ],
+          [
+            "Caesar",
+            67
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Tiberius Gracchus",
+            25
+          ],
+          [
+            "Tiberius Gracchus",
+            24
+          ],
+          [
+            "Caius Gracchus",
+            1
+          ],
+          [
+            "Cato the Younger",
+            18
+          ],
+          [
+            "Caesar",
+            67
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "nm03",
+      "category": "near_miss",
+      "bm25": {
+        "top": [
+          [
+            "Caius Gracchus",
+            23
+          ],
+          [
+            "Tiberius Gracchus",
+            1
+          ],
+          [
+            "Tiberius Gracchus",
+            21
+          ],
+          [
+            "Tiberius Gracchus",
+            26
+          ],
+          [
+            "Tiberius Gracchus",
+            21
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Caius Gracchus",
+            23
+          ],
+          [
+            "Caius Gracchus",
+            22
+          ],
+          [
+            "Caius Gracchus",
+            18
+          ],
+          [
+            "Caius Gracchus",
+            21
+          ],
+          [
+            "Caius Gracchus",
+            26
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caius Gracchus",
+            23
+          ],
+          [
+            "Caius Gracchus",
+            22
+          ],
+          [
+            "Caius Gracchus",
+            18
+          ],
+          [
+            "Tiberius Gracchus",
+            24
+          ],
+          [
+            "Caius Gracchus",
+            1
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "nm04",
+      "category": "near_miss",
+      "bm25": {
+        "top": [
+          [
+            "Tiberius Gracchus",
+            21
+          ],
+          [
+            "Tiberius Gracchus",
+            18
+          ],
+          [
+            "Tiberius Gracchus",
+            17
+          ],
+          [
+            "Caius Gracchus",
+            15
+          ],
+          [
+            "Tiberius Gracchus",
+            15
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.5,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Tiberius Gracchus",
+            17
+          ],
+          [
+            "Tiberius Gracchus",
+            18
+          ],
+          [
+            "Tiberius Gracchus",
+            21
+          ],
+          [
+            "Tiberius Gracchus",
+            16
+          ],
+          [
+            "Caius Gracchus",
+            7
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Tiberius Gracchus",
+            17
+          ],
+          [
+            "Tiberius Gracchus",
+            18
+          ],
+          [
+            "Tiberius Gracchus",
+            21
+          ],
+          [
+            "Tiberius Gracchus",
+            16
+          ],
+          [
+            "Tiberius Gracchus",
+            15
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "nm05",
+      "category": "near_miss",
+      "bm25": {
+        "top": [
+          [
+            "Caius Gracchus",
+            8
+          ],
+          [
+            "Tiberius Gracchus",
+            14
+          ],
+          [
+            "Caius Gracchus",
+            12
+          ],
+          [
+            "Pompey",
+            63
+          ],
+          [
+            "Caius Gracchus",
+            9
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Caius Gracchus",
+            8
+          ],
+          [
+            "Caius Gracchus",
+            9
+          ],
+          [
+            "Caius Gracchus",
+            12
+          ],
+          [
+            "Tiberius Gracchus",
+            12
+          ],
+          [
+            "Caius Gracchus",
+            7
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caius Gracchus",
+            8
+          ],
+          [
+            "Caius Gracchus",
+            9
+          ],
+          [
+            "Caius Gracchus",
+            12
+          ],
+          [
+            "Tiberius Gracchus",
+            14
+          ],
+          [
+            "Caius Gracchus",
+            15
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "nm06",
+      "category": "near_miss",
+      "bm25": {
+        "top": [
+          [
+            "Caius Gracchus",
+            19
+          ],
+          [
+            "Tiberius Gracchus",
+            25
+          ],
+          [
+            "Pompey",
+            43
+          ],
+          [
+            "Pompey",
+            9
+          ],
+          [
+            "Caius Gracchus",
+            24
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Caius Gracchus",
+            19
+          ],
+          [
+            "Tiberius Gracchus",
+            25
+          ],
+          [
+            "Caius Gracchus",
+            24
+          ],
+          [
+            "Pompey",
+            106
+          ],
+          [
+            "Tiberius Gracchus",
+            26
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caius Gracchus",
+            19
+          ],
+          [
+            "Tiberius Gracchus",
+            25
+          ],
+          [
+            "Caius Gracchus",
+            24
+          ],
+          [
+            "Tiberius Gracchus",
+            19
+          ],
+          [
+            "Pompey",
+            106
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "nm07",
+      "category": "near_miss",
+      "bm25": {
+        "top": [
+          [
+            "Caius Gracchus",
+            18
+          ],
+          [
+            "Caius Gracchus",
+            24
+          ],
+          [
+            "Caius Gracchus",
+            4
+          ],
+          [
+            "Tiberius Gracchus",
+            25
+          ],
+          [
+            "Tiberius Gracchus",
+            1
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.5,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Caius Gracchus",
+            24
+          ],
+          [
+            "Caius Gracchus",
+            22
+          ],
+          [
+            "Caius Gracchus",
+            19
+          ],
+          [
+            "Caius Gracchus",
+            5
+          ],
+          [
+            "Caius Gracchus",
+            26
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caius Gracchus",
+            24
+          ],
+          [
+            "Caius Gracchus",
+            22
+          ],
+          [
+            "Caius Gracchus",
+            18
+          ],
+          [
+            "Caius Gracchus",
+            5
+          ],
+          [
+            "Caius Gracchus",
+            23
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "nm08",
+      "category": "near_miss",
+      "bm25": {
+        "top": [
+          [
+            "Cato the Elder",
+            35
+          ],
+          [
+            "Cato the Elder",
+            18
+          ],
+          [
+            "Cato the Younger",
+            33
+          ],
+          [
+            "Cato the Elder",
+            30
+          ],
+          [
+            "Cato the Younger",
+            48
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Cato the Elder",
+            35
+          ],
+          [
+            "Cato the Elder",
+            34
+          ],
+          [
+            "Cato the Elder",
+            36
+          ],
+          [
+            "Cato the Younger",
+            63
+          ],
+          [
+            "Cato the Younger",
+            84
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Cato the Elder",
+            35
+          ],
+          [
+            "Cato the Younger",
+            33
+          ],
+          [
+            "Cato the Younger",
+            63
+          ],
+          [
+            "Cato the Elder",
+            30
+          ],
+          [
+            "Cato the Elder",
+            18
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "nm09",
+      "category": "near_miss",
+      "bm25": {
+        "top": [
+          [
+            "Cato the Younger",
+            82
+          ],
+          [
+            "Cato the Younger",
+            80
+          ],
+          [
+            "Cato the Younger",
+            74
+          ],
+          [
+            "Cato the Younger",
+            79
+          ],
+          [
+            "Cato the Younger",
+            84
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Cato the Younger",
+            94
+          ],
+          [
+            "Cato the Younger",
+            95
+          ],
+          [
+            "Cato the Younger",
+            84
+          ],
+          [
+            "Caesar",
+            53
+          ],
+          [
+            "Cato the Younger",
+            93
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.2,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Cato the Younger",
+            84
+          ],
+          [
+            "Cato the Younger",
+            80
+          ],
+          [
+            "Cato the Younger",
+            95
+          ],
+          [
+            "Cato the Younger",
+            94
+          ],
+          [
+            "Caesar",
+            53
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.14285714285714285,
+        "life@1": true
+      }
+    },
+    {
+      "id": "nm10",
+      "category": "near_miss",
+      "bm25": {
+        "top": [
+          [
+            "Cato the Younger",
+            89
+          ],
+          [
+            "Cato the Younger",
+            96
+          ],
+          [
+            "Cato the Younger",
+            76
+          ],
+          [
+            "Cato the Elder",
+            21
+          ],
+          [
+            "Cato the Younger",
+            93
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Cato the Elder",
+            5
+          ],
+          [
+            "Cato the Younger",
+            90
+          ],
+          [
+            "Cato the Younger",
+            96
+          ],
+          [
+            "Cato the Younger",
+            89
+          ],
+          [
+            "Cato the Younger",
+            88
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.25,
+        "life@1": false
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Cato the Elder",
+            5
+          ],
+          [
+            "Cato the Younger",
+            96
+          ],
+          [
+            "Cato the Younger",
+            89
+          ],
+          [
+            "Cato the Elder",
+            32
+          ],
+          [
+            "Cato the Elder",
+            37
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.3333333333333333,
+        "life@1": false
+      }
+    },
+    {
+      "id": "nm11",
+      "category": "near_miss",
+      "bm25": {
+        "top": [
+          [
+            "Cato the Younger",
+            8
+          ],
+          [
+            "Cato the Younger",
+            32
+          ],
+          [
+            "Cato the Younger",
+            84
+          ],
+          [
+            "Cato the Younger",
+            10
+          ],
+          [
+            "Cato the Younger",
+            88
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Cato the Younger",
+            8
+          ],
+          [
+            "Cato the Elder",
+            5
+          ],
+          [
+            "Cato the Younger",
+            17
+          ],
+          [
+            "Cato the Elder",
+            15
+          ],
+          [
+            "Cato the Elder",
+            1
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Cato the Younger",
+            8
+          ],
+          [
+            "Cato the Elder",
+            5
+          ],
+          [
+            "Cato the Younger",
+            17
+          ],
+          [
+            "Cato the Elder",
+            29
+          ],
+          [
+            "Cato the Younger",
+            88
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "nm12",
+      "category": "near_miss",
+      "bm25": {
+        "top": [
+          [
+            "Cato the Elder",
+            7
+          ],
+          [
+            "Cato the Elder",
+            28
+          ],
+          [
+            "Cato the Younger",
+            7
+          ],
+          [
+            "Cato the Younger",
+            96
+          ],
+          [
+            "Cato the Younger",
+            13
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Cato the Elder",
+            28
+          ],
+          [
+            "Cato the Elder",
+            8
+          ],
+          [
+            "Cato the Elder",
+            7
+          ],
+          [
+            "Cato the Elder",
+            31
+          ],
+          [
+            "Cato the Elder",
+            8
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.5,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Cato the Elder",
+            28
+          ],
+          [
+            "Cato the Elder",
+            7
+          ],
+          [
+            "Cato the Elder",
+            31
+          ],
+          [
+            "Cato the Elder",
+            32
+          ],
+          [
+            "Cato the Younger",
+            13
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.125,
+        "life@1": true
+      }
+    },
+    {
+      "id": "nm13",
+      "category": "near_miss",
+      "bm25": {
+        "top": [
+          [
+            "Cato the Elder",
+            24
+          ],
+          [
+            "Cato the Younger",
+            44
+          ],
+          [
+            "Cato the Elder",
+            29
+          ],
+          [
+            "Cato the Younger",
+            79
+          ],
+          [
+            "Cato the Younger",
+            73
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Cato the Elder",
+            24
+          ],
+          [
+            "Cato the Elder",
+            24
+          ],
+          [
+            "Cato the Younger",
+            94
+          ],
+          [
+            "Cato the Younger",
+            44
+          ],
+          [
+            "Cato the Elder",
+            15
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Cato the Elder",
+            24
+          ],
+          [
+            "Cato the Younger",
+            44
+          ],
+          [
+            "Cato the Elder",
+            29
+          ],
+          [
+            "Cato the Younger",
+            54
+          ],
+          [
+            "Cato the Elder",
+            19
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "n01",
+      "category": "named",
+      "bm25": {
+        "top": [
+          [
+            "Crassus",
+            9
+          ],
+          [
+            "Crassus",
+            11
+          ],
+          [
+            "Crassus",
+            11
+          ],
+          [
+            "Crassus",
+            10
+          ],
+          [
+            "Pompey",
+            38
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Crassus",
+            11
+          ],
+          [
+            "Crassus",
+            10
+          ],
+          [
+            "Crassus",
+            9
+          ],
+          [
+            "Crassus",
+            11
+          ],
+          [
+            "Crassus",
+            9
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Crassus",
+            11
+          ],
+          [
+            "Crassus",
+            10
+          ],
+          [
+            "Crassus",
+            11
+          ],
+          [
+            "Crassus",
+            9
+          ],
+          [
+            "Crassus",
+            9
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "n02",
+      "category": "named",
+      "bm25": {
+        "top": [
+          [
+            "Crassus",
+            31
+          ],
+          [
+            "Crassus",
+            30
+          ],
+          [
+            "Crassus",
+            30
+          ],
+          [
+            "Crassus",
+            33
+          ],
+          [
+            "Crassus",
+            29
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Crassus",
+            31
+          ],
+          [
+            "Crassus",
+            33
+          ],
+          [
+            "Crassus",
+            30
+          ],
+          [
+            "Crassus",
+            32
+          ],
+          [
+            "Crassus",
+            20
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Crassus",
+            31
+          ],
+          [
+            "Crassus",
+            33
+          ],
+          [
+            "Crassus",
+            30
+          ],
+          [
+            "Crassus",
+            32
+          ],
+          [
+            "Crassus",
+            20
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "n03",
+      "category": "named",
+      "bm25": {
+        "top": [
+          [
+            "Caesar",
+            61
+          ],
+          [
+            "Caesar",
+            25
+          ],
+          [
+            "Caesar",
+            38
+          ],
+          [
+            "Pompey",
+            86
+          ],
+          [
+            "Caesar",
+            19
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Pompey",
+            78
+          ],
+          [
+            "Caesar",
+            19
+          ],
+          [
+            "Caesar",
+            31
+          ],
+          [
+            "Caesar",
+            21
+          ],
+          [
+            "Caesar",
+            31
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.3333333333333333,
+        "life@1": false
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caesar",
+            19
+          ],
+          [
+            "Pompey",
+            78
+          ],
+          [
+            "Caesar",
+            25
+          ],
+          [
+            "Caesar",
+            31
+          ],
+          [
+            "Caesar",
+            31
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.25,
+        "life@1": true
+      }
+    },
+    {
+      "id": "n04",
+      "category": "named",
+      "bm25": {
+        "top": [
+          [
+            "Caesar",
+            2
+          ],
+          [
+            "Caesar",
+            1
+          ],
+          [
+            "Cato the Younger",
+            48
+          ],
+          [
+            "Caesar",
+            16
+          ],
+          [
+            "Caesar",
+            48
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Caesar",
+            2
+          ],
+          [
+            "Caesar",
+            1
+          ],
+          [
+            "Pompey",
+            29
+          ],
+          [
+            "Caesar",
+            34
+          ],
+          [
+            "Caesar",
+            29
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caesar",
+            2
+          ],
+          [
+            "Caesar",
+            1
+          ],
+          [
+            "Caesar",
+            11
+          ],
+          [
+            "Caesar",
+            48
+          ],
+          [
+            "Caesar",
+            21
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "n05",
+      "category": "named",
+      "bm25": {
+        "top": [
+          [
+            "Pompey",
+            85
+          ],
+          [
+            "Pompey",
+            29
+          ],
+          [
+            "Pompey",
+            30
+          ],
+          [
+            "Pompey",
+            38
+          ],
+          [
+            "Pompey",
+            99
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Pompey",
+            30
+          ],
+          [
+            "Pompey",
+            33
+          ],
+          [
+            "Pompey",
+            29
+          ],
+          [
+            "Pompey",
+            28
+          ],
+          [
+            "Pompey",
+            32
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.5,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Pompey",
+            30
+          ],
+          [
+            "Pompey",
+            29
+          ],
+          [
+            "Pompey",
+            28
+          ],
+          [
+            "Pompey",
+            35
+          ],
+          [
+            "Pompey",
+            85
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.125,
+        "life@1": true
+      }
+    },
+    {
+      "id": "n06",
+      "category": "named",
+      "bm25": {
+        "top": [
+          [
+            "Caesar",
+            43
+          ],
+          [
+            "Caesar",
+            43
+          ],
+          [
+            "Caesar",
+            61
+          ],
+          [
+            "Caesar",
+            48
+          ],
+          [
+            "Caesar",
+            15
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Caesar",
+            67
+          ],
+          [
+            "Caesar",
+            67
+          ],
+          [
+            "Caesar",
+            43
+          ],
+          [
+            "Caesar",
+            70
+          ],
+          [
+            "Pompey",
+            94
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caesar",
+            43
+          ],
+          [
+            "Pompey",
+            94
+          ],
+          [
+            "Caesar",
+            62
+          ],
+          [
+            "Caesar",
+            8
+          ],
+          [
+            "Caesar",
+            67
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.2,
+        "life@1": true
+      }
+    },
+    {
+      "id": "n07",
+      "category": "named",
+      "bm25": {
+        "top": [
+          [
+            "Crassus",
+            11
+          ],
+          [
+            "Crassus",
+            14
+          ],
+          [
+            "Crassus",
+            29
+          ],
+          [
+            "Crassus",
+            24
+          ],
+          [
+            "Crassus",
+            16
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.16666666666666666,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Crassus",
+            6
+          ],
+          [
+            "Crassus",
+            2
+          ],
+          [
+            "Crassus",
+            7
+          ],
+          [
+            "Crassus",
+            1
+          ],
+          [
+            "Crassus",
+            17
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.5,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Crassus",
+            2
+          ],
+          [
+            "Crassus",
+            7
+          ],
+          [
+            "Crassus",
+            14
+          ],
+          [
+            "Crassus",
+            11
+          ],
+          [
+            "Crassus",
+            6
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "n08",
+      "category": "named",
+      "bm25": {
+        "top": [
+          [
+            "Pompey",
+            106
+          ],
+          [
+            "Caesar",
+            67
+          ],
+          [
+            "Pompey",
+            50
+          ],
+          [
+            "Cato the Younger",
+            60
+          ],
+          [
+            "Cato the Younger",
+            71
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Pompey",
+            106
+          ],
+          [
+            "Pompey",
+            107
+          ],
+          [
+            "Pompey",
+            53
+          ],
+          [
+            "Pompey",
+            103
+          ],
+          [
+            "Pompey",
+            105
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Pompey",
+            106
+          ],
+          [
+            "Pompey",
+            50
+          ],
+          [
+            "Caesar",
+            47
+          ],
+          [
+            "Pompey",
+            63
+          ],
+          [
+            "Pompey",
+            107
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "p01",
+      "category": "paraphrase",
+      "bm25": {
+        "top": [
+          [
+            "Pompey",
+            40
+          ],
+          [
+            "Pompey",
+            28
+          ],
+          [
+            "Crassus",
+            21
+          ],
+          [
+            "Cato the Elder",
+            24
+          ],
+          [
+            "Pompey",
+            84
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.0,
+        "life@1": false
+      },
+      "vector": {
+        "top": [
+          [
+            "Caesar",
+            2
+          ],
+          [
+            "Pompey",
+            28
+          ],
+          [
+            "Cato the Elder",
+            13
+          ],
+          [
+            "Caesar",
+            15
+          ],
+          [
+            "Caesar",
+            1
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Pompey",
+            28
+          ],
+          [
+            "Caesar",
+            1
+          ],
+          [
+            "Caesar",
+            2
+          ],
+          [
+            "Cato the Elder",
+            13
+          ],
+          [
+            "Caesar",
+            15
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.3333333333333333,
+        "life@1": false
+      }
+    },
+    {
+      "id": "p02",
+      "category": "paraphrase",
+      "bm25": {
+        "top": [
+          [
+            "Tiberius Gracchus",
+            12
+          ],
+          [
+            "Caius Gracchus",
+            8
+          ],
+          [
+            "Cato the Elder",
+            6
+          ],
+          [
+            "Tiberius Gracchus",
+            13
+          ],
+          [
+            "Caius Gracchus",
+            12
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Tiberius Gracchus",
+            12
+          ],
+          [
+            "Tiberius Gracchus",
+            13
+          ],
+          [
+            "Tiberius Gracchus",
+            15
+          ],
+          [
+            "Tiberius Gracchus",
+            14
+          ],
+          [
+            "Caius Gracchus",
+            8
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Tiberius Gracchus",
+            12
+          ],
+          [
+            "Tiberius Gracchus",
+            13
+          ],
+          [
+            "Caius Gracchus",
+            8
+          ],
+          [
+            "Tiberius Gracchus",
+            19
+          ],
+          [
+            "Tiberius Gracchus",
+            20
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "p03",
+      "category": "paraphrase",
+      "bm25": {
+        "top": [
+          [
+            "Caius Gracchus",
+            23
+          ],
+          [
+            "Crassus",
+            25
+          ],
+          [
+            "Caesar",
+            15
+          ],
+          [
+            "Crassus",
+            2
+          ],
+          [
+            "Caesar",
+            45
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Caius Gracchus",
+            23
+          ],
+          [
+            "Cato the Younger",
+            93
+          ],
+          [
+            "Cato the Younger",
+            91
+          ],
+          [
+            "Cato the Younger",
+            89
+          ],
+          [
+            "Cato the Younger",
+            97
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caius Gracchus",
+            23
+          ],
+          [
+            "Caesar",
+            15
+          ],
+          [
+            "Cato the Younger",
+            90
+          ],
+          [
+            "Caesar",
+            45
+          ],
+          [
+            "Cato the Younger",
+            93
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "p04",
+      "category": "paraphrase",
+      "bm25": {
+        "top": [
+          [
+            "Pompey",
+            30
+          ],
+          [
+            "Pompey",
+            85
+          ],
+          [
+            "Pompey",
+            93
+          ],
+          [
+            "Pompey",
+            43
+          ],
+          [
+            "Caesar",
+            36
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Pompey",
+            30
+          ],
+          [
+            "Pompey",
+            33
+          ],
+          [
+            "Caesar",
+            51
+          ],
+          [
+            "Pompey",
+            28
+          ],
+          [
+            "Caesar",
+            11
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Pompey",
+            30
+          ],
+          [
+            "Caesar",
+            51
+          ],
+          [
+            "Pompey",
+            85
+          ],
+          [
+            "Crassus",
+            10
+          ],
+          [
+            "Crassus",
+            17
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "p05",
+      "category": "paraphrase",
+      "bm25": {
+        "top": [
+          [
+            "Pompey",
+            19
+          ],
+          [
+            "Pompey",
+            32
+          ],
+          [
+            "Pompey",
+            20
+          ],
+          [
+            "Cato the Elder",
+            13
+          ],
+          [
+            "Cato the Younger",
+            57
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.0,
+        "life@1": false
+      },
+      "vector": {
+        "top": [
+          [
+            "Caius Gracchus",
+            22
+          ],
+          [
+            "Crassus",
+            29
+          ],
+          [
+            "Cato the Younger",
+            95
+          ],
+          [
+            "Cato the Younger",
+            90
+          ],
+          [
+            "Caius Gracchus",
+            23
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.25,
+        "life@1": false
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Crassus",
+            29
+          ],
+          [
+            "Pompey",
+            32
+          ],
+          [
+            "Caius Gracchus",
+            22
+          ],
+          [
+            "Cato the Younger",
+            95
+          ],
+          [
+            "Cato the Younger",
+            90
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.2,
+        "life@1": false
+      }
+    },
+    {
+      "id": "p06",
+      "category": "paraphrase",
+      "bm25": {
+        "top": [
+          [
+            "Caesar",
+            27
+          ],
+          [
+            "Pompey",
+            19
+          ],
+          [
+            "Pompey",
+            16
+          ],
+          [
+            "Pompey",
+            79
+          ],
+          [
+            "Pompey",
+            55
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.0,
+        "life@1": false
+      },
+      "vector": {
+        "top": [
+          [
+            "Cato the Elder",
+            35
+          ],
+          [
+            "Caesar",
+            27
+          ],
+          [
+            "Cato the Elder",
+            18
+          ],
+          [
+            "Pompey",
+            62
+          ],
+          [
+            "Caius Gracchus",
+            11
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caesar",
+            27
+          ],
+          [
+            "Cato the Elder",
+            35
+          ],
+          [
+            "Cato the Elder",
+            18
+          ],
+          [
+            "Pompey",
+            62
+          ],
+          [
+            "Caius Gracchus",
+            11
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.5,
+        "life@1": false
+      }
+    },
+    {
+      "id": "p07",
+      "category": "paraphrase",
+      "bm25": {
+        "top": [
+          [
+            "Caius Gracchus",
+            27
+          ],
+          [
+            "Tiberius Gracchus",
+            2
+          ],
+          [
+            "Cato the Elder",
+            32
+          ],
+          [
+            "Cato the Younger",
+            1
+          ],
+          [
+            "Crassus",
+            24
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Caius Gracchus",
+            27
+          ],
+          [
+            "Tiberius Gracchus",
+            2
+          ],
+          [
+            "Tiberius Gracchus",
+            1
+          ],
+          [
+            "Cato the Elder",
+            32
+          ],
+          [
+            "Crassus",
+            24
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caius Gracchus",
+            27
+          ],
+          [
+            "Tiberius Gracchus",
+            2
+          ],
+          [
+            "Cato the Elder",
+            32
+          ],
+          [
+            "Crassus",
+            24
+          ],
+          [
+            "Cato the Younger",
+            1
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "p08",
+      "category": "paraphrase",
+      "bm25": {
+        "top": [
+          [
+            "Caesar",
+            12
+          ],
+          [
+            "Caesar",
+            34
+          ],
+          [
+            "Crassus",
+            15
+          ],
+          [
+            "Caesar",
+            28
+          ],
+          [
+            "Crassus",
+            18
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Crassus",
+            14
+          ],
+          [
+            "Caesar",
+            30
+          ],
+          [
+            "Caesar",
+            12
+          ],
+          [
+            "Cato the Younger",
+            73
+          ],
+          [
+            "Crassus",
+            12
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.3333333333333333,
+        "life@1": false
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caesar",
+            12
+          ],
+          [
+            "Crassus",
+            14
+          ],
+          [
+            "Caesar",
+            30
+          ],
+          [
+            "Cato the Younger",
+            73
+          ],
+          [
+            "Crassus",
+            12
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "sh01",
+      "category": "shared",
+      "bm25": {
+        "top": [
+          [
+            "Pompey",
+            94
+          ],
+          [
+            "Caesar",
+            46
+          ],
+          [
+            "Pompey",
+            22
+          ],
+          [
+            "Pompey",
+            42
+          ],
+          [
+            "Caesar",
+            51
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Caesar",
+            41
+          ],
+          [
+            "Caesar",
+            51
+          ],
+          [
+            "Pompey",
+            94
+          ],
+          [
+            "Pompey",
+            90
+          ],
+          [
+            "Caesar",
+            49
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Pompey",
+            94
+          ],
+          [
+            "Caesar",
+            51
+          ],
+          [
+            "Caesar",
+            41
+          ],
+          [
+            "Pompey",
+            90
+          ],
+          [
+            "Cato the Younger",
+            72
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "sh02",
+      "category": "shared",
+      "bm25": {
+        "top": [
+          [
+            "Pompey",
+            30
+          ],
+          [
+            "Cato the Younger",
+            70
+          ],
+          [
+            "Pompey",
+            61
+          ],
+          [
+            "Pompey",
+            19
+          ],
+          [
+            "Pompey",
+            25
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Caesar",
+            41
+          ],
+          [
+            "Pompey",
+            52
+          ],
+          [
+            "Pompey",
+            9
+          ],
+          [
+            "Pompey",
+            85
+          ],
+          [
+            "Caesar",
+            51
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.0,
+        "life@1": false
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caesar",
+            41
+          ],
+          [
+            "Pompey",
+            85
+          ],
+          [
+            "Pompey",
+            52
+          ],
+          [
+            "Pompey",
+            9
+          ],
+          [
+            "Pompey",
+            94
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": false,
+        "mrr": 0.0,
+        "life@1": false
+      }
+    },
+    {
+      "id": "sh03",
+      "category": "shared",
+      "bm25": {
+        "top": [
+          [
+            "Cato the Younger",
+            33
+          ],
+          [
+            "Cato the Younger",
+            36
+          ],
+          [
+            "Caesar",
+            7
+          ],
+          [
+            "Cato the Younger",
+            63
+          ],
+          [
+            "Cato the Younger",
+            42
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Cato the Younger",
+            33
+          ],
+          [
+            "Cato the Younger",
+            36
+          ],
+          [
+            "Caesar",
+            8
+          ],
+          [
+            "Caesar",
+            7
+          ],
+          [
+            "Crassus",
+            13
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Cato the Younger",
+            33
+          ],
+          [
+            "Cato the Younger",
+            36
+          ],
+          [
+            "Caesar",
+            7
+          ],
+          [
+            "Caesar",
+            8
+          ],
+          [
+            "Cato the Younger",
+            63
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      }
+    },
+    {
+      "id": "sh04",
+      "category": "shared",
+      "bm25": {
+        "top": [
+          [
+            "Caesar",
+            5
+          ],
+          [
+            "Caesar",
+            4
+          ],
+          [
+            "Caesar",
+            12
+          ],
+          [
+            "Caesar",
+            48
+          ],
+          [
+            "Caesar",
+            28
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.3333333333333333,
+        "life@1": true
+      },
+      "vector": {
+        "top": [
+          [
+            "Caesar",
+            13
+          ],
+          [
+            "Caesar",
+            12
+          ],
+          [
+            "Caesar",
+            5
+          ],
+          [
+            "Crassus",
+            14
+          ],
+          [
+            "Caesar",
+            13
+          ]
+        ],
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
+        "life@1": true
+      },
+      "hybrid": {
+        "top": [
+          [
+            "Caesar",
+            5
+          ],
+          [
+            "Caesar",
+            12
+          ],
+          [
+            "Caesar",
+            13
+          ],
+          [
+            "Pompey",
+            66
+          ],
+          [
+            "Cato the Younger",
+            42
+          ]
+        ],
+        "hit@1": false,
+        "hit@5": true,
+        "mrr": 0.5,
+        "life@1": true
+      }
+    }
+  ]
+}

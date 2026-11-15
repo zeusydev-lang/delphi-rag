@@ -9,8 +9,8 @@ vector_search and bm25_search return Hits ranked best first. Their scores are
 NOT comparable:
   - vector_search: cosine distance, 0 = identical, lower is better
   - bm25_search:   lakebase_text's negative BM25 score, lower is better
-so hybrid_search combines them by rank, with Reciprocal Rank Fusion (RRF):
-each chunk scores sum(1 / (RRF_K + rank)) over the lists it appears in.
+so hybrid_search combines them by rank, with weighted Reciprocal Rank Fusion:
+each chunk scores sum(weight / (RRF_K + rank)) over the lists it appears in.
 """
 
 from collections.abc import Mapping, Sequence
@@ -26,6 +26,10 @@ BM25_INDEX = "chunks_tsv_bm25"
 SEARCH_VERSION = "rrf-v1"
 RRF_K = 60  # the usual constant: damps the gap between rank 1 and rank 2
 CANDIDATES = 20  # taken from each search before fusing
+# Equal weights. BM25 at 0.5 was measured once (rrf-v2-weighted, 2026-11-15)
+# and kept out: hit@5 rose by one question but hit@1, MRR and near-miss life@1
+# fell, and vector alone still beat both. See docs/OPERATIONS.md, Search.
+WEIGHTS: dict[str, float] = {"bm25": 1.0, "vector": 1.0}
 
 
 class Hit(BaseModel):
@@ -100,20 +104,28 @@ def bm25_search(
 
 
 def rrf(
-    rankings: Mapping[str, Sequence[int]], k: int = RRF_K
+    rankings: Mapping[str, Sequence[int]],
+    k: int = RRF_K,
+    weights: Mapping[str, float] | None = None,
 ) -> list[tuple[int, float, dict[str, int]]]:
     """Fuse ranked lists of chunk ids, best first.
 
     Returns (chunk_id, score, {list name: rank}) for every chunk in any list,
-    highest score first. Ranks count from 1. Ties go to the chunk with the
-    better single rank, then the lower id, so the order never varies.
+    highest score first. Ranks count from 1; a list's weight defaults to 1.
+    Ties go to the chunk with the better single rank, then the lower id, so
+    the order never varies.
     """
+    weights = weights or {}
     ranks: dict[int, dict[str, int]] = {}
     for name, ids in rankings.items():
         for rank, chunk_id in enumerate(ids, start=1):
             ranks.setdefault(chunk_id, {}).setdefault(name, rank)  # first one counts
     fused = [
-        (chunk_id, sum(1 / (k + r) for r in by_list.values()), by_list)
+        (
+            chunk_id,
+            sum(weights.get(name, 1.0) / (k + r) for name, r in by_list.items()),
+            by_list,
+        )
         for chunk_id, by_list in ranks.items()
     ]
     fused.sort(key=lambda f: (-f[1], min(f[2].values()), f[0]))
@@ -139,12 +151,18 @@ class FusedHit(BaseModel):
 
 
 def fuse_hits(
-    lists: Mapping[str, Sequence[Hit]], *, k: int = 10, rrf_k: int = RRF_K
+    lists: Mapping[str, Sequence[Hit]],
+    *,
+    k: int = 10,
+    rrf_k: int = RRF_K,
+    weights: Mapping[str, float] | None = None,
 ) -> list[FusedHit]:
-    """RRF over lists of Hits; the top k as FusedHits."""
+    """Weighted RRF over lists of Hits; the top k as FusedHits."""
     by_id = {hit.chunk_id: hit for hits in lists.values() for hit in hits}
     fused = rrf(
-        {name: [h.chunk_id for h in hits] for name, hits in lists.items()}, rrf_k
+        {name: [h.chunk_id for h in hits] for name, hits in lists.items()},
+        rrf_k,
+        weights,
     )
     return [
         FusedHit(
@@ -164,8 +182,9 @@ def hybrid_search(
     corpus_version: str,
     k: int = 10,
     candidates: int = CANDIDATES,
+    weights: Mapping[str, float] = WEIGHTS,
 ) -> list[FusedHit]:
-    """BM25 and vector search, top `candidates` each, fused with RRF."""
+    """BM25 and vector search, top `candidates` each, fused with weighted RRF."""
     lists = {
         "bm25": bm25_search(
             conn, question, corpus_version=corpus_version, k=candidates
@@ -174,4 +193,4 @@ def hybrid_search(
             conn, query_vector, corpus_version=corpus_version, k=candidates
         ),
     }
-    return fuse_hits(lists, k=k)
+    return fuse_hits(lists, k=k, weights=weights)

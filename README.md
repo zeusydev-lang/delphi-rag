@@ -21,7 +21,20 @@ TODO: diagram of question → cache gate (hit / gray zone / miss) → hybrid sea
 
 ## Results
 
-TODO: retrieval and cache eval results, by version.
+**Retrieval** (33 hand-labelled questions on seven Lives, 2026-11-15):
+
+| | hit@5 | hit@1 | near-miss: right Life first |
+|---|---|---|---|
+| BM25 alone | 0.67 | 0.58 | 0.92 |
+| **Vector alone** | **0.97** | **0.73** | 0.92 |
+| Hybrid (RRF) | 0.85 | 0.67 | 0.92 |
+
+The expected result was that hybrid search would beat both. On this corpus it
+doesn't: BM25 matches words like "Utica" in the wrong passages, and plain fusion
+lets them push correct passages down. Halving BM25's weight didn't fix it.
+Details in the [operations guide](docs/OPERATIONS.md#results-on-lives-v1-2026-11-15).
+
+Cache eval results: TODO.
 
 ## Key decisions
 

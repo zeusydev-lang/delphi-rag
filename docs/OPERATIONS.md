@@ -178,6 +178,65 @@ scores can't be compared with each other, so hybrid search combines them by rank
 |---|---|---|
 | `vector_search` | HNSW on `embedding` (pgvector, cosine) | cosine distance, 0 = identical |
 | `bm25_search` | `lakebase_bm25` on the generated `tsv` column (Neon only) | negative BM25; 0 = no shared words |
+| `hybrid_search` | both: top 20 from each, fused with RRF | RRF score, higher is better |
+
+### Fusion (RRF)
+
+Each chunk scores `sum(weight / (60 + rank))` over the lists it appears in
+(ranks from 1). Ties go to the better single rank, then the lower chunk id, so
+results never vary between runs. `FusedHit.ranks` keeps each list's rank, which
+is what explains a miss. `SEARCH_VERSION` names the current behaviour and is
+saved with every eval result.
+
+### Retrieval eval
+
+```
+uv run python -m scripts.retrieval_eval            # against dev; one Voyage call, < $0.0001
+uv run python -m scripts.retrieval_eval --compare  # every saved version side by side
+```
+
+`evals/retrieval.json` holds 33 questions in four categories: `near_miss` (13:
+the right Gracchus or Cato), `named` (8), `paraphrase` (8, no rare keywords),
+`shared` (4, events told in more than one Life). Each lists the sections that
+count as correct and an exact quote from one of them; `test_retrieval_eval.py`
+checks every quote against the text. Results go to
+`evals/results/retrieval/<SEARCH_VERSION>.json`.
+
+Metrics: **hit@1** and **hit@5** (an expected section in the top 1 / top 5),
+**MRR@10**, and **life@1** (the top hit is from the Life the answer is about,
+the near-miss measure).
+
+### Results on `lives-v1` (2026-11-15)
+
+| | hit@1 | hit@5 | MRR | life@1 | near-miss life@1 |
+|---|---|---|---|---|---|
+| BM25 alone | 0.58 | 0.67 | 0.63 | 0.88 | 0.92 |
+| **vector alone** | **0.73** | **0.97** | **0.81** | 0.85 | 0.92 |
+| hybrid, `rrf-v1` (equal weights) | 0.67 | 0.85 | 0.75 | 0.85 | 0.92 |
+| hybrid, `rrf-v2-weighted` (BM25 at 0.5) | 0.64 | 0.88 | 0.73 | 0.82 | 0.85 |
+
+33 questions, so one question is 0.03. Vector and BM25 numbers were identical
+across both runs.
+
+What this shows:
+
+- **Vector search wins on this corpus, and hybrid is worse than vector alone.**
+  BM25 locks onto a word that appears in the wrong sections: "How did Cato die
+  at Utica?" ranks the many sections that mention Utica (s74 to s84) above the
+  death scene (s89 to s93), which never uses the word. "Pompey" matches every
+  Pompey chunk, because the Life's name is in `tsv`. Equal-weight RRF lets these
+  push correct sections out of the top 5.
+- **The near-miss problem is mostly handled already.** Vector search picks the
+  right Gracchus or Cato in 12 of 13 near-miss questions, including "Which
+  brother was killed on the Capitol?". The likely reason is the
+  `Plutarch, Life of <name>` line ingest puts in front of every embedded chunk.
+- **Halving BM25's weight didn't fix it.** It was set once, before measuring
+  (not tuned on these questions), and kept out: one more question in the top 5,
+  but worse hit@1, MRR and near-miss life@1. The default stays `rrf-v1`;
+  `hybrid_search(weights=...)` remains for experiments.
+- **Open for the answer phase:** answer from vector search (best here), or from
+  hybrid (keeps exact matching for rare names, which may matter more on the
+  full 52 Lives). Decide before Phase 5.
 
 ### Spike results (Neon test branch, 2026-11-15)
 
