@@ -8,7 +8,7 @@ create table if not exists chunks (
     id              bigint generated always as identity primary key,
     corpus_version  text not null,   -- e.g. 'lives-v1'; cache entries are keyed to it
     life            text not null,   -- e.g. 'Tiberius Gracchus'
-    chapter         int  not null check (chapter >= 0),
+    chapter         int  not null check (chapter >= 0),  -- renamed to section in 004
     chunk_index     int  not null check (chunk_index >= 0),
     text            text not null check (length(text) > 0),
     embedding       vector(1024) not null,   -- voyage-3.5 default size
@@ -33,15 +33,6 @@ begin
 end;
 $$;
 
--- Permissions: start from zero, then grant only what each job needs.
-revoke all on chunks from delphi_ingest, delphi_query;
-
--- Ingest adds chunks (ON CONFLICT DO NOTHING makes reloads safe). It can't
--- change or delete them. MAINTAIN (Postgres 17) lets it VACUUM after a load,
--- so BM25 statistics are fresh without using the owner login.
-grant select, insert (corpus_version, life, chapter, chunk_index, text, embedding)
-    on chunks to delphi_ingest;
-grant maintain on chunks to delphi_ingest;
-
--- Query only reads.
-grant select on chunks to delphi_query;
+-- Permissions for chunks live in 004, after `chapter` is renamed to
+-- `section` (the runner re-applies every file, so a grant naming the old
+-- column here would fail on every later run).

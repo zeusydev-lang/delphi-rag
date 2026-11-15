@@ -23,7 +23,7 @@ BM25_INDEX = "chunks_tsv_bm25"
 class Hit(BaseModel):
     chunk_id: int
     life: str
-    chapter: int
+    section: int  # paragraph section within the Life, from 1
     chunk_index: int
     text: str
     score: float  # lower is better for both searches
@@ -39,7 +39,7 @@ def vector_search(
     """The k chunks whose embeddings are closest to query_vector (cosine)."""
     rows = conn.execute(
         """
-        select id as chunk_id, life, chapter, chunk_index, text,
+        select id as chunk_id, life, section, chunk_index, text,
                embedding <=> %(vec)s::vector as score
           from chunks
          where corpus_version = %(version)s
@@ -72,7 +72,7 @@ def bm25_search(
     rows = conn.execute(
         """
         select * from (
-            select id as chunk_id, life, chapter, chunk_index, text,
+            select id as chunk_id, life, section, chunk_index, text,
                    tsv <@> to_bm25query(to_tsvector('english', %(q)s), %(index)s)
                        as score
               from chunks

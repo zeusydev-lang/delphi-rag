@@ -83,13 +83,15 @@ class FakeEmbeddings:
     """A fake Voyage /embeddings endpoint on localhost.
 
     Records each request body. Answers with fake_vector() for every input and
-    reports one token per word. Set `fail_with` to an HTTP status to fail.
+    reports one token per word. Set `fail_with` to an HTTP status to fail every
+    request, or put statuses in `fail_next` to fail only the next few.
     """
 
     def __init__(self, dims: int = 8):
         self.requests: list[dict] = []
         self.dims = dims
         self.fail_with: int | None = None
+        self.fail_next: list[int] = []
         fake = self
 
         class Handler(BaseHTTPRequestHandler):
@@ -97,8 +99,9 @@ class FakeEmbeddings:
                 length = int(self.headers.get("content-length", 0))
                 body = json.loads(self.rfile.read(length))
                 fake.requests.append(body)
-                if fake.fail_with:
-                    status = fake.fail_with
+                failing = fake.fail_next.pop(0) if fake.fail_next else fake.fail_with
+                if failing:
+                    status = failing
                     reply = {"detail": "secret-looking provider message"}
                 else:
                     status = 200

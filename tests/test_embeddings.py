@@ -76,6 +76,7 @@ class TestEmbed:
             run(embedder.embed(["a"], input_type="query"))
         message = str(info.value)
         assert "401" in message
+        assert info.value.status_code == 401
         assert "secret-looking" not in message
         assert "pa-test-not-real" not in message
 

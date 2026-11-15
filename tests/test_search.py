@@ -25,7 +25,7 @@ def seeded():
         for i, (life, text) in enumerate(PASSAGES):
             conn.execute(
                 "insert into chunks"
-                " (corpus_version, life, chapter, chunk_index, text, embedding)"
+                " (corpus_version, life, section, chunk_index, text, embedding)"
                 " values (%s, %s, 1, %s, %s, %s::vector)",
                 [VERSION, life, i, text, to_vector(hashed_vector(text))],
             )
@@ -88,7 +88,7 @@ class TestChunkPermissions:
         with denied, connect("query") as conn:
             conn.execute(
                 "insert into chunks"
-                " (corpus_version, life, chapter, chunk_index, text, embedding)"
+                " (corpus_version, life, section, chunk_index, text, embedding)"
                 " values ('x', 'x', 1, 0, 'x', %s::vector)",
                 [to_vector(hashed_vector("x"))],
             )
@@ -98,7 +98,7 @@ class TestChunkPermissions:
         with connect("ingest") as conn:
             cur = conn.execute(
                 "insert into chunks"
-                " (corpus_version, life, chapter, chunk_index, text, embedding)"
+                " (corpus_version, life, section, chunk_index, text, embedding)"
                 " values (%s, %s, 1, 0, %s, %s::vector) on conflict do nothing",
                 [VERSION, life, text, to_vector(hashed_vector(text))],
             )
