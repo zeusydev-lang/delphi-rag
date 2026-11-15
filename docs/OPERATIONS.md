@@ -131,13 +131,17 @@ uv run python -m scripts.ingest                  # embed and load into dev (.env
 per transaction, so a second run costs nothing and an interrupted run resumes.
 It stops if the spend passes `DAILY_SPEND_CAP_USD`.
 
-Voyage accounts without a payment method have low rate limits (a few
-requests and about 10K tokens per minute), and the default batch of 64 chunks
-is refused with HTTP 429. Pace the calls instead:
+Voyage accounts without a payment method are limited to **3 requests and
+10K tokens per minute** (Voyage's own 429 message). Adding a payment method
+raises the limits, and the free tokens (200M for the Voyage 3 series) still
+apply. Without one, the default batch of 64 chunks is refused. Pace the calls:
 
 ```
-uv run python -m scripts.ingest --batch-size 20 --pause 62   # ~7K tokens per call, one call a minute
+uv run python -m scripts.ingest --batch-size 10 --pause 62   # ~4K tokens per call, one call a minute
 ```
+
+20-chunk batches (~8K tokens by word count) were still refused: Voyage counts
+more tokens per word than the estimate, so leave plenty of room.
 
 A 429 that still gets through is waited out (65 s, up to 5 times); other
 errors stop the run, and the next run resumes where it stopped. `--fake-embeddings` loads

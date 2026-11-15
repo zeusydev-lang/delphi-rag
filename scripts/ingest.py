@@ -220,7 +220,9 @@ async def main() -> int:
         chunks,
         version=version,
         source_sha256=digest,
-        embedder=None if args.fake_embeddings else EmbeddingClient(),
+        # No quick retries inside litellm: they spend the per-minute request
+        # allowance at once. _embed_with_backoff waits out 429s instead.
+        embedder=None if args.fake_embeddings else EmbeddingClient(num_retries=0),
         cap_usd=float(os.environ.get("DAILY_SPEND_CAP_USD", "0.25")),
         batch_size=args.batch_size,
         pause_s=args.pause,
