@@ -1,0 +1,272 @@
+{
+  "about": "Cache eval: pairs of questions. `same` is true only if one answer fully and correctly answers both; `a` plays the cached question, `b` the new one. Written 2026-11-15. near_miss pairs differ in a person, ordinal, number, or what is asked; several share every name, so only similarity and the judge can tell them apart.",
+  "labels": "1",
+  "pairs": [
+    {
+      "id": "pa01",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "How did Crassus die?",
+      "b": "What was the manner of Crassus's death?"
+    },
+    {
+      "id": "pa02",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "What did Caesar do when he reached the Rubicon?",
+      "b": "When Caesar got to the Rubicon, what did he do?"
+    },
+    {
+      "id": "pa03",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "How much ransom did the pirates first ask from Caesar?",
+      "b": "What ransom did the pirates originally demand for Caesar?"
+    },
+    {
+      "id": "pa04",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "How long did it take Pompey to clear the seas of pirates?",
+      "b": "How long did Pompey need to rid the seas of pirates?"
+    },
+    {
+      "id": "pa05",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "Who struck Caesar first when he was assassinated?",
+      "b": "Who gave Caesar the first blow when he was murdered?"
+    },
+    {
+      "id": "pa06",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "Which Cato kept saying that Carthage ought to be destroyed?",
+      "b": "Which Cato always said Carthage must be destroyed?"
+    },
+    {
+      "id": "pa07",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "How did Cato the Younger die?",
+      "b": "How did Cato of Utica die?"
+    },
+    {
+      "id": "pa08",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "How did Gaius Gracchus die?",
+      "b": "How did Caius Gracchus die?"
+    },
+    {
+      "id": "pa09",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "What did Surena do with the head and hand of Crassus?",
+      "b": "What did Surena do with Crassus's head and hand?"
+    },
+    {
+      "id": "pa10",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "Why did Tiberius Gracchus want to give public land to the poor?",
+      "b": "Why did Tiberius Gracchus propose giving public land to poor citizens?"
+    },
+    {
+      "id": "pa11",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "How did Crassus make his fortune?",
+      "b": "How did Crassus become so rich?"
+    },
+    {
+      "id": "pa12",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "What was done to Pompey's body in Egypt?",
+      "b": "What happened to Pompey's body after he was killed in Egypt?"
+    },
+    {
+      "id": "pa13",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "Who reconciled Crassus and Pompey?",
+      "b": "Who made peace between Crassus and Pompey?"
+    },
+    {
+      "id": "pa14",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "What did Cato the Elder do as censor?",
+      "b": "What did Marcus Cato do as censor?"
+    },
+    {
+      "id": "nm01",
+      "kind": "near_miss",
+      "same": false,
+      "a": "How did Tiberius Gracchus die?",
+      "b": "How did Caius Gracchus die?"
+    },
+    {
+      "id": "nm02",
+      "kind": "near_miss",
+      "same": false,
+      "a": "What laws did Tiberius Gracchus pass?",
+      "b": "What laws did Caius Gracchus pass?"
+    },
+    {
+      "id": "nm03",
+      "kind": "near_miss",
+      "same": false,
+      "a": "How did Cato the Elder die?",
+      "b": "How did Cato the Younger die?"
+    },
+    {
+      "id": "nm04",
+      "kind": "near_miss",
+      "same": false,
+      "a": "What did Cato the Younger think of Caesar?",
+      "b": "What did Cato the Elder think of Caesar?"
+    },
+    {
+      "id": "nm05",
+      "kind": "near_miss",
+      "same": false,
+      "a": "What happened in Pompey's first consulship?",
+      "b": "What happened in Pompey's second consulship?"
+    },
+    {
+      "id": "nm06",
+      "kind": "near_miss",
+      "same": false,
+      "a": "What did Caesar do in his first consulship?",
+      "b": "What did Caesar do in his second consulship?"
+    },
+    {
+      "id": "nm07",
+      "kind": "near_miss",
+      "same": false,
+      "a": "Which Gracchus was the elder brother?",
+      "b": "Which Gracchus was the younger brother?"
+    },
+    {
+      "id": "nm08",
+      "kind": "near_miss",
+      "same": false,
+      "a": "How many talents did the pirates ask from Caesar?",
+      "b": "How many talents did Caesar promise to pay the pirates?"
+    },
+    {
+      "id": "nm09",
+      "kind": "near_miss",
+      "same": false,
+      "a": "Why did Crassus march against the Parthians?",
+      "b": "Why did Crassus march against Spartacus?"
+    },
+    {
+      "id": "nm10",
+      "kind": "near_miss",
+      "same": false,
+      "a": "What did Caesar say at the Rubicon?",
+      "b": "What did Caesar do after crossing the Rubicon?"
+    },
+    {
+      "id": "nm11",
+      "kind": "near_miss",
+      "same": false,
+      "a": "How did Cornelia react to the death of Tiberius?",
+      "b": "How did Cornelia react to the deaths of both her sons?"
+    },
+    {
+      "id": "nm12",
+      "kind": "near_miss",
+      "same": false,
+      "a": "How many men did Crassus lose at Carrhae?",
+      "b": "How many men did Crassus have at Carrhae?"
+    },
+    {
+      "id": "nm13",
+      "kind": "near_miss",
+      "same": false,
+      "a": "When did Caesar cross the Rubicon?",
+      "b": "Why did Caesar cross the Rubicon?"
+    },
+    {
+      "id": "nm14",
+      "kind": "near_miss",
+      "same": false,
+      "a": "Which Cato died at Utica?",
+      "b": "Which Cato was born at Tusculum?"
+    },
+    {
+      "id": "st01",
+      "kind": "same_topic",
+      "same": false,
+      "a": "How did Crassus die?",
+      "b": "How did Pompey die?"
+    },
+    {
+      "id": "st02",
+      "kind": "same_topic",
+      "same": false,
+      "a": "How did Caesar die?",
+      "b": "How did Pompey die?"
+    },
+    {
+      "id": "st03",
+      "kind": "same_topic",
+      "same": false,
+      "a": "What did Pompey do against the pirates?",
+      "b": "What did Caesar do against the pirates?"
+    },
+    {
+      "id": "st04",
+      "kind": "same_topic",
+      "same": false,
+      "a": "Who killed Caesar?",
+      "b": "Who killed Pompey?"
+    },
+    {
+      "id": "st05",
+      "kind": "same_topic",
+      "same": false,
+      "a": "How did Crassus become rich?",
+      "b": "How did Pompey become rich?"
+    },
+    {
+      "id": "st06",
+      "kind": "same_topic",
+      "same": false,
+      "a": "What did Cato the Younger think of Pompey?",
+      "b": "What did Cato the Younger think of Caesar?"
+    },
+    {
+      "id": "un01",
+      "kind": "unrelated",
+      "same": false,
+      "a": "How did Crassus die?",
+      "b": "Which Cato said Carthage must be destroyed?"
+    },
+    {
+      "id": "un02",
+      "kind": "unrelated",
+      "same": false,
+      "a": "What did Caesar do at the Rubicon?",
+      "b": "Why did Tiberius Gracchus want land reform?"
+    },
+    {
+      "id": "un03",
+      "kind": "unrelated",
+      "same": false,
+      "a": "How long did Pompey take to clear the seas?",
+      "b": "Who was Cornelia?"
+    },
+    {
+      "id": "un04",
+      "kind": "unrelated",
+      "same": false,
+      "a": "How did Cato die at Utica?",
+      "b": "How much ransom did the pirates ask from Caesar?"
+    }
+  ]
+}

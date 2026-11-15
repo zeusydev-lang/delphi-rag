@@ -321,3 +321,66 @@ its citations isn't measured yet.
 - Seen while testing: an answer can over-hedge ("killed on the Capitol"
   followed by "the passage does not say he was killed on the Capitol itself").
   A prompt change would be `a2`, measured against `a1`.
+
+## Cache (`agent/cached_answer.py`)
+
+```
+uv run python -m scripts.ask "How did Tiberius Gracchus die?"      # uses the cache
+uv run python -m scripts.ask --no-cache "..."                       # always fresh
+uv run python -m scripts.cache_eval                                 # 38 labelled pairs
+uv run python -m scripts.cache_eval --pairs heldout                 # 10 held-out pairs
+```
+
+Every question is embedded once. The 5 nearest cached questions for the same
+corpus, prompt, search and model versions are fetched (`answer_cache`, HNSW),
+the nearest one with the same signature is preferred, and the gate decides:
+
+| Check | Result | Model call |
+|---|---|---|
+| names, ordinals or numbers differ (`core/signature.py`) | miss | none |
+| similarity >= 0.95 | **hit**: the stored answer is served | none |
+| similarity < 0.85 | miss | none |
+| in between | the judge (Haiku 5.5, prompt `j2`) decides | one small call |
+
+A miss answers fresh and stores the answer; a hit only increments
+`hit_count`. Changing the corpus, the answer prompt, the search or the model
+starts a fresh cache. The `query` login can read, add and count hits, but not
+change or delete answers.
+
+**Signatures** map aliases to one name (Gaius -> Caius; Marcus Cato, the
+Censor -> Cato the Elder; Cato of Utica -> Cato the Younger; the elder/younger
+Gracchus -> Tiberius/Caius) and treat any other capitalised word as a name. A
+bare "Cato" matches neither Cato. They are deliberately strict: "what ransom did
+the pirates *first* ask" reads "first" as an ordinal and misses its paraphrase.
+A missed hit costs half a cent; a wrong cached answer costs trust.
+
+### Cache eval (2026-11-15)
+
+| | main (38 pairs) | held-out (10 pairs) |
+|---|---|---|
+| **false hits** (different questions, same answer) | **0** | **0** |
+| hit rate on true paraphrases | 0.86 (12 of 14) | 1.00 (4 of 4) |
+| judge calls | 11 | 7 |
+| cost | $0.0018 | $0.0011 |
+
+- **The signature check did most of the work.** It stopped all 20 pairs that
+  differ in a person, ordinal or number, including Cato the Elder vs the
+  Younger at 0.969 similarity, which thresholds alone would have served.
+- **Judge `j1` gave one false hit** (`c1`, saved): "How many talents did the
+  pirates ask from Caesar?" vs "...did Caesar promise to pay the pirates?" It
+  assumed both named the same sum; Plutarch has 20 asked and 50 promised.
+  `j2` adds one rule: a different action, role or direction (asked vs offered,
+  promised vs paid, lost vs had) makes a different question, and the judge
+  must not assume two actions are the same fact.
+- **How j2 was checked:** the 10 held-out pairs were written and committed
+  *before* j2 (commit `3496b7f`). j1 already scored 0 false hits on them; j2
+  kept that and fixed nm08, with no loss of paraphrase hits on either set.
+  j2's examples are close to nm08's wording, so the held-out set is what
+  shows it generalises. The next gate change needs new held-out pairs.
+- The two missed paraphrases: pa03 (the "first" ordinal above) and pa14 ("Marcus
+  Cato" vs "Cato the Elder"), where the judge rightly noted that both Catos were
+  named Marcus.
+- On `dev`: "How did Tiberius Gracchus die?" answered fresh ($0.00064); "In what
+  way did Tiberius Gracchus die?" served from the cache (0.989, $0); "How did
+  Caius Gracchus die?" missed on its signature and was answered fresh.
+
