@@ -120,6 +120,17 @@ class TestBm25Search:
             hits = bm25_search(conn, "Opimius Aventine", corpus_version=VERSION, k=3)
         assert hits[0].life == "Caius Gracchus"
 
+    def test_non_matches_are_not_returned(self, seeded):
+        # Only one passage mentions Utica; the others score 0 and must not
+        # come back to earn a rank in fusion.
+        with connect("query") as conn:
+            hits = bm25_search(conn, "Utica", corpus_version=VERSION, k=5)
+        assert [h.life for h in hits] == ["Cato the Younger"]
+
+    def test_no_matching_words_returns_nothing(self, seeded):
+        with connect("query") as conn:
+            assert bm25_search(conn, "Hannibal", corpus_version=VERSION) == []
+
     def test_scores_are_negative_and_ascending(self, seeded):
         with connect("query") as conn:
             hits = bm25_search(conn, "Caesar", corpus_version=VERSION, k=5)

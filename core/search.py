@@ -60,18 +60,28 @@ def bm25_search(
 ) -> list[Hit]:
     """The k chunks that best match the words of query (BM25, Neon only).
 
+    Chunks that share no words with the query score exactly 0. Whether they
+    come back depends on the plan (an index scan may skip them, a sequential
+    scan keeps them), so they are always filtered out: a non-match must never
+    earn a rank in fusion.
+
     The corpus_version filter runs after the index picks its candidates
     (lakebase_text's default), which is fine while the table holds one or two
     versions. Revisit with the index's prefilter option if that changes.
     """
     rows = conn.execute(
         """
-        select id as chunk_id, life, chapter, chunk_index, text,
-               tsv <@> to_bm25query(to_tsvector('english', %(q)s), %(index)s) as score
-          from chunks
-         where corpus_version = %(version)s
+        select * from (
+            select id as chunk_id, life, chapter, chunk_index, text,
+                   tsv <@> to_bm25query(to_tsvector('english', %(q)s), %(index)s)
+                       as score
+              from chunks
+             where corpus_version = %(version)s
+             order by score
+             limit %(k)s
+        ) ranked
+         where score < 0
          order by score
-         limit %(k)s
         """,
         {"q": query, "index": BM25_INDEX, "version": corpus_version, "k": k},
     ).fetchall()

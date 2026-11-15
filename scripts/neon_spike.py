@@ -5,8 +5,8 @@ statistics are fresh, then searches through the query login and prints the
 rankings. Safe to run again (existing passages are kept).
 
 Usage (against the Neon test branch):
-    uv run --env-file .env.test python scripts/neon_spike.py --fake-embeddings
-    uv run --env-file .env.test python scripts/neon_spike.py   # real Voyage embeddings
+    uv run --env-file .env.test python -m scripts.neon_spike --fake-embeddings
+    uv run --env-file .env.test python -m scripts.neon_spike   # real Voyage embeddings
 """
 
 import argparse
