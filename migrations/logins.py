@@ -1,12 +1,12 @@
 """Turn on login for the delphi roles and write their connection strings.
 
-For each role (ingest, query) this:
+For each role (ingest, query, eval) this:
   1. generates a strong random password,
   2. runs ALTER ROLE ... LOGIN PASSWORD using the owner connection,
-  3. writes INGEST_DATABASE_URL and QUERY_DATABASE_URL
+  3. writes INGEST_DATABASE_URL, QUERY_DATABASE_URL and EVAL_DATABASE_URL
      into the env file you name. Passwords are never printed.
 
-Running it again rotates both passwords.
+Running it again rotates all three passwords.
 Run migrations first, so the roles exist.
 
 Usage:
@@ -27,6 +27,7 @@ from psycopg import sql
 ROLES = {
     "delphi_ingest": "INGEST_DATABASE_URL",
     "delphi_query": "QUERY_DATABASE_URL",
+    "delphi_eval": "EVAL_DATABASE_URL",
 }
 
 

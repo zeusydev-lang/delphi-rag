@@ -232,6 +232,9 @@ async def main() -> int:
         action="store_true",
         help="re-check the saved results for this prompt version; no API calls",
     )
+    parser.add_argument(
+        "--no-record", action="store_true", help="don't add the run to eval_runs"
+    )
     args = parser.parse_args()
     if args.compare:
         return compare()

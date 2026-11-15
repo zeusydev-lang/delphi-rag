@@ -124,6 +124,9 @@ def print_report(report: dict) -> None:
 async def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--pairs", choices=sorted(PAIR_SETS), default="main")
+    parser.add_argument(
+        "--no-record", action="store_true", help="don't add the run to eval_runs"
+    )
     args = parser.parse_args()
     report = await run_eval(args.pairs)
     print_report(report)

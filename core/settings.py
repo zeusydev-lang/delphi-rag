@@ -3,6 +3,7 @@
 Each job asks for its own role:
     ingest -> INGEST_DATABASE_URL  (write chunks of the corpus)
     query  -> QUERY_DATABASE_URL   (read chunks; read and write the answer cache)
+    eval   -> EVAL_DATABASE_URL    (record eval runs; nothing else)
 
 The owner login (DATABASE_URL) is deliberately not available here.
 It is only for migrations/.
@@ -13,11 +14,12 @@ from typing import Literal
 
 from dotenv import load_dotenv
 
-Role = Literal["ingest", "query"]
+Role = Literal["ingest", "query", "eval"]
 
 ENV_KEYS: dict[Role, str] = {
     "ingest": "INGEST_DATABASE_URL",
     "query": "QUERY_DATABASE_URL",
+    "eval": "EVAL_DATABASE_URL",
 }
 
 # Values already set in the environment (GitHub Secrets, --env-file) win over .env.

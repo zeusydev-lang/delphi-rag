@@ -45,6 +45,8 @@ jobs:
         run: uv run ruff check .
       - name: Formatting
         run: uv run ruff format --check .
+      - name: README results match the saved eval results
+        run: uv run python -m scripts.eval_report --check-readme
       - name: Set up the test database
         # A throwaway password for a throwaway database; not a secret.
         run: |

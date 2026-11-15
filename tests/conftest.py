@@ -29,6 +29,7 @@ KEYS = (
     "DATABASE_URL",
     "INGEST_DATABASE_URL",
     "QUERY_DATABASE_URL",
+    "EVAL_DATABASE_URL",
 )
 NEON_EXTENSIONS = ("lakebase_text",)
 
