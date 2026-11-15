@@ -210,13 +210,15 @@ the near-miss measure).
 
 | | hit@1 | hit@5 | MRR | life@1 | near-miss life@1 |
 |---|---|---|---|---|---|
-| BM25 alone | 0.58 | 0.67 | 0.63 | 0.88 | 0.92 |
-| **vector alone** | **0.73** | **0.97** | **0.81** | 0.85 | 0.92 |
-| hybrid, `rrf-v1` (equal weights) | 0.67 | 0.85 | 0.75 | 0.85 | 0.92 |
-| hybrid, `rrf-v2-weighted` (BM25 at 0.5) | 0.64 | 0.88 | 0.73 | 0.82 | 0.85 |
+| BM25 alone | 0.61 | 0.73 | 0.67 | 0.88 | 0.92 |
+| **vector alone** | **0.76** | **0.97** | **0.83** | 0.85 | 0.92 |
+| hybrid, `rrf-v1` (equal weights) | 0.70 | 0.91 | 0.79 | 0.85 | 0.92 |
 
-33 questions, so one question is 0.03. Vector and BM25 numbers were identical
-across both runs.
+Labels v2. Two expected sections were added after the answer eval cited them:
+Elder s7 for nm12 and Pompey s30 for n05; each question's `note` says why.
+Under labels v1, hybrid `rrf-v1` scored hit@5 0.85, and `rrf-v2-weighted` (BM25
+at 0.5, saved with v1 labels) scored 0.88 with worse hit@1, MRR and near-miss
+life@1. 33 questions, so one question is 0.03.
 
 What this shows:
 
@@ -234,9 +236,9 @@ What this shows:
   (not tuned on these questions), and kept out: one more question in the top 5,
   but worse hit@1, MRR and near-miss life@1. The default stays `rrf-v1`;
   `hybrid_search(weights=...)` remains for experiments.
-- **Open for the answer phase:** answer from vector search (best here), or from
-  hybrid (keeps exact matching for rare names, which may matter more on the
-  full 52 Lives). Decide before Phase 5.
+- **Answers use hybrid** (decided for Phase 5): it keeps exact matching for rare
+  names, which may matter more on the full 52 Lives. `SEARCH_VERSION` is saved
+  with every answer, so this can be re-measured.
 
 ### Spike results (Neon test branch, 2026-11-15)
 
@@ -265,3 +267,57 @@ embeddings; needs `VOYAGE_API_KEY`) or with `--fake-embeddings` (no key).
   `chunks`, so a load can vacuum without the owner login.
 - Use the **direct** connection string for `DATABASE_URL` (no `-pooler` in the
   host). The migration runner and `logins.py` need a session, not the pooler.
+
+## Answers (`agent/answer.py`)
+
+```
+uv run python -m scripts.ask "How did Cato die at Utica?"
+uv run python -m scripts.answer_eval              # 38 questions, about $0.02
+uv run python -m scripts.answer_eval --rescore    # re-check saved answers after a label change; no API calls
+uv run python -m scripts.answer_eval --compare
+```
+
+`answer_question()` embeds the question, takes the top 5 from `hybrid_search`,
+and makes one structured call to Claude Haiku 5.5 (`LLM_MODEL`) with prompt
+`a1` (`agent/prompts.py`). Passages go in as `<passage id="P1" life=...
+section=...>`, the question in `<question>`, all escaped; the model never sees
+database ids.
+
+**Every citation is checked in code** before an answer is accepted: it must
+name a passage it was given and quote it word for word (whitespace, case,
+curly quotes and HTML escapes are forgiven). An answer must cite something; a
+decline (`answerable: false`) needn't. A failed check goes back to the model
+once, without the quoted text. Claude's built-in citations feature isn't
+used: it needs document blocks and can't be combined with structured output.
+
+Each `AnswerResult` records `prompt_version`, `search_version`,
+`corpus_version` and model, for the cache to key on. The budget
+(`DAILY_SPEND_CAP_USD`) is checked after the embedding and after the answer.
+
+### Answer eval (`a1`, labels v2, 2026-11-15)
+
+| | |
+|---|---|
+| answered (33 answerable) | 0.94 |
+| cites an expected section | 0.91 |
+| main citation from the right Life | 0.97 (near-miss: 1.00) |
+| declined (5 unanswerable) | 1.00, including two general-knowledge traps |
+| sent back once by the citation check | 0.05 |
+| cost, time | $0.022 for 38 questions; 2.6 s each |
+
+Checked in code, with no judge model: whether an answer is *correct* beyond
+its citations isn't measured yet.
+
+- **The two answerable misses are retrieval misses, and the model said so.**
+  "How did Cato die at Utica?" and "What did Pompey do when his army broke at
+  Pharsalia?": hybrid search didn't retrieve the scene (the BM25 problem
+  above), and the model answered that the passages don't describe it instead
+  of answering from memory.
+- **`right_life` checks the first citation only.** Answers often add a second
+  citation from another Life that retells the event (Pompey s78 for the
+  Rubicon, Crassus s14 for the reconciliation) or that tells the brothers apart
+  (Caius s1 alongside Tiberius s24). The first version counted those as
+  wrong-Life citations (0.76); they aren't.
+- Seen while testing: an answer can over-hedge ("killed on the Capitol"
+  followed by "the passage does not say he was killed on the Capitol itself").
+  A prompt change would be `a2`, measured against `a1`.

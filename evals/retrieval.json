@@ -1,5 +1,5 @@
 {
-  "about": "Retrieval eval for delphi-rag. Each question lists the (life, section) pairs that count as correct for corpus lives-v1; `evidence` is an exact quote from one of them, checked by tests/test_retrieval_eval.py. Questions written 2026-11-15 from the Gutenberg #674 text. `answer_life` (optional) names the Life the answer is about when `expected` also includes another Life's retelling; life@1 counts a top hit from answer_life or any expected section.",
+  "about": "Retrieval eval for delphi-rag. Each question lists the (life, section) pairs that count as correct for corpus lives-v1; `evidence` is an exact quote from one of them, checked by tests/test_retrieval_eval.py. Questions written 2026-11-15 from the Gutenberg #674 text. `answer_life` (optional) names the Life the answer is about when `expected` also includes another Life's retelling; life@1 counts a top hit from answer_life or any expected section. Labels v2 (2026-11-15): two expected sections added after the first answer eval showed them (see each question's note).",
   "corpus_version": "lives-v1",
   "questions": [
     {
@@ -178,9 +178,14 @@
         {
           "life": "Cato the Elder",
           "section": 8
+        },
+        {
+          "life": "Cato the Elder",
+          "section": 7
         }
       ],
-      "evidence": "selling them in their old age"
+      "evidence": "selling them in their old age",
+      "note": "Elder s7 also says it (\"ought to be sold again, when they grew old\"); added 2026-11-15 after the answer eval cited it."
     },
     {
       "id": "nm13",
@@ -258,9 +263,14 @@
         {
           "life": "Pompey",
           "section": 33
+        },
+        {
+          "life": "Pompey",
+          "section": 30
         }
       ],
-      "evidence": "in the space of three months"
+      "evidence": "in the space of three months",
+      "note": "Pompey s30 gives the forty days for the western seas; added 2026-11-15 after the answer eval cited it."
     },
     {
       "id": "n06",
@@ -514,5 +524,6 @@
       ],
       "evidence": "doubly supported by the interests of Crassus and Pompey"
     }
-  ]
+  ],
+  "labels": "2"
 }

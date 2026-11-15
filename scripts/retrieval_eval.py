@@ -69,6 +69,7 @@ class Question(BaseModel):
 class EvalSet(BaseModel):
     about: str
     corpus_version: str
+    labels: str = "1"  # bumped whenever expected sections change
     questions: list[Question]
 
 
@@ -176,6 +177,7 @@ async def run_eval(evalset: EvalSet, embedder: EmbeddingClient) -> dict:
     return {
         "search_version": SEARCH_VERSION,
         "corpus_version": evalset.corpus_version,
+        "labels": evalset.labels,
         "embedding_model": embedder.model,
         "measured_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "questions": len(questions),

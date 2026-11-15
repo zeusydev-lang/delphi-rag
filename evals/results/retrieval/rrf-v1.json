@@ -1,29 +1,30 @@
 {
   "search_version": "rrf-v1",
   "corpus_version": "lives-v1",
+  "labels": "2",
   "embedding_model": "voyage/voyage-3.5",
-  "measured_at": "2026-11-15T18:01:42+00:00",
+  "measured_at": "2026-11-15T20:01:11+00:00",
   "questions": 33,
   "cost_usd": 2.634e-05,
   "rates": {
     "bm25": {
       "overall": {
-        "hit@1": 0.576,
-        "hit@5": 0.667,
-        "mrr": 0.626,
+        "hit@1": 0.606,
+        "hit@5": 0.727,
+        "mrr": 0.667,
         "life@1": 0.879
       },
       "by_category": {
         "named": {
           "hit@1": 0.5,
-          "hit@5": 0.5,
-          "mrr": 0.521,
+          "hit@5": 0.625,
+          "mrr": 0.562,
           "life@1": 1.0
         },
         "near_miss": {
-          "hit@1": 0.615,
-          "hit@5": 0.769,
-          "mrr": 0.705,
+          "hit@1": 0.692,
+          "hit@5": 0.846,
+          "mrr": 0.782,
           "life@1": 0.923
         },
         "paraphrase": {
@@ -42,16 +43,16 @@
     },
     "vector": {
       "overall": {
-        "hit@1": 0.727,
+        "hit@1": 0.758,
         "hit@5": 0.97,
-        "mrr": 0.814,
+        "mrr": 0.829,
         "life@1": 0.848
       },
       "by_category": {
         "named": {
-          "hit@1": 0.625,
+          "hit@1": 0.75,
           "hit@5": 1.0,
-          "mrr": 0.792,
+          "mrr": 0.854,
           "life@1": 0.875
         },
         "near_miss": {
@@ -76,22 +77,22 @@
     },
     "hybrid": {
       "overall": {
-        "hit@1": 0.667,
-        "hit@5": 0.848,
-        "mrr": 0.751,
+        "hit@1": 0.697,
+        "hit@5": 0.909,
+        "mrr": 0.789,
         "life@1": 0.848
       },
       "by_category": {
         "named": {
-          "hit@1": 0.625,
-          "hit@5": 0.875,
-          "mrr": 0.697,
+          "hit@1": 0.75,
+          "hit@5": 1.0,
+          "mrr": 0.806,
           "life@1": 1.0
         },
         "near_miss": {
           "hit@1": 0.769,
-          "hit@5": 0.846,
-          "mrr": 0.827,
+          "hit@5": 0.923,
+          "mrr": 0.856,
           "life@1": 0.923
         },
         "paraphrase": {
@@ -1104,9 +1105,9 @@
             13
           ]
         ],
-        "hit@1": false,
-        "hit@5": false,
-        "mrr": 0.0,
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
         "life@1": true
       },
       "vector": {
@@ -1161,8 +1162,8 @@
           ]
         ],
         "hit@1": false,
-        "hit@5": false,
-        "mrr": 0.125,
+        "hit@5": true,
+        "mrr": 0.5,
         "life@1": true
       }
     },
@@ -1633,8 +1634,8 @@
           ]
         ],
         "hit@1": false,
-        "hit@5": false,
-        "mrr": 0.0,
+        "hit@5": true,
+        "mrr": 0.3333333333333333,
         "life@1": true
       },
       "vector": {
@@ -1660,9 +1661,9 @@
             32
           ]
         ],
-        "hit@1": false,
+        "hit@1": true,
         "hit@5": true,
-        "mrr": 0.5,
+        "mrr": 1.0,
         "life@1": true
       },
       "hybrid": {
@@ -1688,9 +1689,9 @@
             85
           ]
         ],
-        "hit@1": false,
-        "hit@5": false,
-        "mrr": 0.125,
+        "hit@1": true,
+        "hit@5": true,
+        "mrr": 1.0,
         "life@1": true
       }
     },

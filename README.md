@@ -25,14 +25,20 @@ TODO: diagram of question → cache gate (hit / gray zone / miss) → hybrid sea
 
 | | hit@5 | hit@1 | near-miss: right Life first |
 |---|---|---|---|
-| BM25 alone | 0.67 | 0.58 | 0.92 |
-| **Vector alone** | **0.97** | **0.73** | 0.92 |
-| Hybrid (RRF) | 0.85 | 0.67 | 0.92 |
+| BM25 alone | 0.73 | 0.61 | 0.92 |
+| **Vector alone** | **0.97** | **0.76** | 0.92 |
+| Hybrid (RRF) | 0.91 | 0.70 | 0.92 |
 
 The expected result was that hybrid search would beat both. On this corpus it
 doesn't: BM25 matches words like "Utica" in the wrong passages, and plain fusion
 lets them push correct passages down. Halving BM25's weight didn't fix it.
-Details in the [operations guide](docs/OPERATIONS.md#results-on-lives-v1-2026-11-15).
+
+**Answers** (Claude Haiku 5.5 over hybrid search, every citation checked
+against the passage it quotes): 94% of answerable questions answered, 91% cite
+an expected passage, the main citation is from the right Life 97% of the time
+(100% on near-miss questions), and all 5 out-of-corpus questions were
+declined. $0.022 for 38 questions. Details in the
+[operations guide](docs/OPERATIONS.md#answers-agentanswerpy).
 
 Cache eval results: TODO.
 

@@ -1,0 +1,26 @@
+{
+  "about": "Questions the seven Lives in lives-v1 can't answer; the right response is to decline (answerable=false). Checked 2026-11-15 by searching the text: Solon, Granicus, Lycurgus and Bucephalus don't appear; Cicero appears but his death isn't told. Two are general-knowledge traps (Cicero's death, Alexander's horse).",
+  "corpus_version": "lives-v1",
+  "questions": [
+    {
+      "id": "u01",
+      "question": "What laws did Solon give the Athenians?"
+    },
+    {
+      "id": "u02",
+      "question": "What happened at the battle of the Granicus?"
+    },
+    {
+      "id": "u03",
+      "question": "What did Lycurgus decide about the Spartans' common meals?"
+    },
+    {
+      "id": "u04",
+      "question": "How did Cicero die?"
+    },
+    {
+      "id": "u05",
+      "question": "What was the name of Alexander the Great's horse?"
+    }
+  ]
+}
