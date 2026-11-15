@@ -247,6 +247,9 @@ async def main() -> int:
     parser.add_argument(
         "--compare", action="store_true", help="table of saved versions"
     )
+    parser.add_argument(
+        "--no-record", action="store_true", help="don't add the run to eval_runs"
+    )
     args = parser.parse_args()
     if args.compare:
         return compare()

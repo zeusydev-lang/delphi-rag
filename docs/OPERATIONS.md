@@ -45,11 +45,12 @@ Each job uses its own login with only the rights it needs.
 | `neondb_owner` | Migration runner only | Everything. Never used by app code or GitHub |
 | `delphi_ingest` | Loading the corpus | Write chunks (grants added with the chunks table) |
 | `delphi_query` | Answering questions | Read chunks; read and write the cache (grants added with those tables) |
+| `delphi_eval` | Recording eval runs | Insert and read `eval_runs`; nothing else |
 
 The roles are created by `001_roles.sql` without passwords. `logins.py` turns
-on login with random passwords and writes `INGEST_DATABASE_URL` and
-`QUERY_DATABASE_URL` into the env file you name. Passwords are never printed.
-Running it again rotates both. Neither login can create tables.
+on login with random passwords and writes `INGEST_DATABASE_URL`,
+`QUERY_DATABASE_URL` and `EVAL_DATABASE_URL` into the env file you name.
+Passwords are never printed. Running it again rotates all three. Neither login can create tables.
 
 ### Running migrations
 
@@ -383,4 +384,49 @@ A missed hit costs half a cent; a wrong cached answer costs trust.
 - On `dev`: "How did Tiberius Gracchus die?" answered fresh ($0.00064); "In what
   way did Tiberius Gracchus die?" served from the cache (0.989, $0); "How did
   Caius Gracchus die?" missed on its signature and was answered fresh.
+
+## Evals
+
+Three evals, each saving one JSON file per version under `evals/results/`:
+
+| Eval | Measures | Cost | Results |
+|---|---|---|---|
+| `scripts.retrieval_eval` | BM25, vector and hybrid on 33 labelled questions | < $0.0001 | `retrieval/<SEARCH_VERSION>.json` |
+| `scripts.answer_eval` | answers and citations on 33 + 5 unanswerable | ~$0.02 | `answers/<PROMPT_VERSION>.json` |
+| `scripts.cache_eval [--pairs heldout]` | the cache gate on 38 (+10 held-out) pairs | < $0.002 | `cache/<CACHE_VERSION>[-heldout].json` |
+
+**Where results live.** The JSON files are the source of truth and are
+committed with the change they measure. Each run is also recorded in the
+`eval_runs` table through the `eval` login, with the commit it ran on (and
+whether there were uncommitted changes), so runs that were never committed
+aren't lost. Recording never fails an eval: with no `EVAL_DATABASE_URL` it warns
+and carries on. `--no-record` skips it.
+
+```
+uv run python -m scripts.eval_report                  # current results, from the files
+uv run python -m scripts.eval_report --history        # every recorded run
+uv run python -m scripts.eval_report --import         # add saved files to eval_runs (safe to repeat)
+uv run python -m scripts.eval_report --write-readme   # regenerate the README results tables
+```
+
+**The README tables are generated** from the result files for the versions in
+the code (`SEARCH_VERSION`, `PROMPT_VERSION`, `CACHE_VERSION`), between the
+`<!-- results:start -->` and `<!-- results:end -->` markers. CI runs
+`--check-readme` and fails if they don't match, so after any eval that changes a
+current version, run `--write-readme` and commit the README with the results.
+Imported (backfilled) runs have no commit, because the commit they ran on
+isn't known.
+
+**Rules the evals follow:**
+
+- Bump the version (`SEARCH_VERSION`, `PROMPT_VERSION`, `CACHE_VERSION`,
+  `JUDGE_PROMPT_VERSION`) whenever behaviour changes, so results never mix.
+- Set thresholds and weights before measuring, not by tuning on the eval set.
+- Before fixing a failure, write and commit **new held-out cases** that the fix
+  hasn't seen; keep the fix only if it holds on them too.
+- Corrections to labels are made openly: bump `labels` in the eval file, add a
+  `note` to each changed question, and rerun (or `answer_eval --rescore`, which
+  re-checks saved answers without API calls).
+- The Voyage free tier allows 3 requests a minute: leave about a minute between
+  eval runs and `scripts.ask`.
 
