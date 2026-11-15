@@ -20,7 +20,7 @@ from collections.abc import Sequence
 import psycopg
 from pydantic import BaseModel
 
-from agent.llm import EmbeddingClient, LlmUsage, check_budget
+from agent.llm import EmbeddingClient, LlmError, LlmUsage, check_budget
 from core.corpus import (
     CHUNKER,
     CORPUS_VERSION,
@@ -39,6 +39,8 @@ from scripts.fetch_corpus import RAW_PATH, sha256
 from scripts.spike_data import hashed_vector
 
 BATCH_SIZE = 64
+RATE_LIMIT_WAIT_S = 65  # rate limits are per minute
+RATE_LIMIT_RETRIES = 5
 
 
 class VersionMismatch(RuntimeError):
@@ -91,6 +93,19 @@ def _existing_keys(conn: psycopg.Connection, version: str) -> set[tuple]:
     return {(r["life"], r["section"], r["chunk_index"]) for r in rows}
 
 
+async def _embed_with_backoff(embedder: EmbeddingClient, texts, wait_s: float):
+    """Embed, waiting out rate limits (HTTP 429) instead of failing the run."""
+    for attempt in range(1, RATE_LIMIT_RETRIES + 1):
+        try:
+            return await embedder.embed(texts, input_type="document")
+        except LlmError as err:
+            if err.status_code != 429 or attempt == RATE_LIMIT_RETRIES:
+                raise
+            print(f"  rate limited; waiting {wait_s:.0f}s (attempt {attempt})")
+            await asyncio.sleep(wait_s)
+    raise AssertionError("unreachable")
+
+
 async def ingest(
     chunks: Sequence[Chunk],
     *,
@@ -99,6 +114,8 @@ async def ingest(
     embedder: EmbeddingClient | None,  # None: free hashed vectors
     cap_usd: float,
     batch_size: int = BATCH_SIZE,
+    pause_s: float = 0.0,  # wait between embedding calls (low rate limits)
+    rate_limit_wait_s: float = RATE_LIMIT_WAIT_S,
 ) -> IngestReport:
     """Embed and insert the chunks the database doesn't have yet."""
     with connect("ingest") as conn:
@@ -113,7 +130,9 @@ async def ingest(
         if embedder is None:
             vectors = [hashed_vector(t) for t in texts]
         else:
-            result = await embedder.embed(texts, input_type="document")
+            if start and pause_s:
+                await asyncio.sleep(pause_s)
+            result = await _embed_with_backoff(embedder, texts, rate_limit_wait_s)
             vectors = result.vectors
             usage.add(result.usage)
             check_budget(usage, cap_usd)
@@ -164,6 +183,18 @@ async def main() -> int:
         action="store_true",
         help=f"hashed word vectors, loaded as '{CORPUS_VERSION}-fake' (free)",
     )
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=BATCH_SIZE,
+        help=f"chunks per embedding call (default {BATCH_SIZE})",
+    )
+    parser.add_argument(
+        "--pause",
+        type=float,
+        default=0.0,
+        help="seconds between embedding calls, for low rate limits",
+    )
     args = parser.parse_args()
 
     if not RAW_PATH.exists():
@@ -191,6 +222,8 @@ async def main() -> int:
         source_sha256=digest,
         embedder=None if args.fake_embeddings else EmbeddingClient(),
         cap_usd=float(os.environ.get("DAILY_SPEND_CAP_USD", "0.25")),
+        batch_size=args.batch_size,
+        pause_s=args.pause,
     )
     print(
         f"\n{report.new_chunks} new chunk(s); {report.total_chunks} in {version!r}. "

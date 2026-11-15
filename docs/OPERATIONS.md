@@ -129,7 +129,18 @@ uv run python -m scripts.ingest                  # embed and load into dev (.env
 
 `ingest` embeds only the chunks the database doesn't already have, one batch
 per transaction, so a second run costs nothing and an interrupted run resumes.
-It stops if the spend passes `DAILY_SPEND_CAP_USD`. `--fake-embeddings` loads
+It stops if the spend passes `DAILY_SPEND_CAP_USD`.
+
+Voyage accounts without a payment method have low rate limits (a few
+requests and about 10K tokens per minute), and the default batch of 64 chunks
+is refused with HTTP 429. Pace the calls instead:
+
+```
+uv run python -m scripts.ingest --batch-size 20 --pause 62   # ~7K tokens per call, one call a minute
+```
+
+A 429 that still gets through is waited out (65 s, up to 5 times); other
+errors stop the run, and the next run resumes where it stopped. `--fake-embeddings` loads
 free hashed vectors under a separate version (`lives-v1-fake`), so they never
 mix with real ones.
 

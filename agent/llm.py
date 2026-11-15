@@ -91,6 +91,10 @@ def default_thinking(model: str) -> dict[str, Any] | None:
 class LlmError(Exception):
     """The LLM call failed. The message never contains the API key."""
 
+    def __init__(self, message: str, status_code: int | None = None):
+        super().__init__(message)
+        self.status_code = status_code  # e.g. 429 when rate limited
+
 
 class BudgetExceeded(Exception):
     """A job's model spend passed its cap."""
@@ -100,7 +104,7 @@ def _redacted(err: Exception, what: str) -> LlmError:
     # Type and status only: provider messages can echo request details.
     status = getattr(err, "status_code", None)
     detail = f" (HTTP {status})" if status else ""
-    return LlmError(f"{what} failed: {type(err).__name__}{detail}")
+    return LlmError(f"{what} failed: {type(err).__name__}{detail}", status)
 
 
 # --- Request and response ----------------------------------------------------

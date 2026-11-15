@@ -6,7 +6,7 @@ import os
 import psycopg
 import pytest
 
-from agent.llm import EmbeddingClient
+from agent.llm import EmbeddingClient, LlmError
 from core.corpus import CHUNKER, Chunk
 from core.db import connect
 from core.search import bm25_search
@@ -55,6 +55,7 @@ def fake():
 def embedder(fake, monkeypatch):
     monkeypatch.setenv("VOYAGE_API_KEY", "pa-test-not-real")
     fake.requests.clear()
+    fake.fail_next.clear()
     return EmbeddingClient("voyage/voyage-3.5", api_base=fake.url, num_retries=0)
 
 
@@ -119,6 +120,17 @@ class TestIngest:
         run_ingest(CHUNKS, embedder)
         with pytest.raises(VersionMismatch, match="new CORPUS_VERSION"):
             run_ingest(CHUNKS, embedder, source_sha256="b" * 64)
+
+    def test_rate_limit_is_waited_out(self, empty, embedder, fake):
+        fake.fail_next = [429, 429]
+        report = run_ingest(CHUNKS, embedder, rate_limit_wait_s=0)
+        assert report.new_chunks == 4
+        assert len(fake.requests) == 3  # two refusals, then the real call
+
+    def test_other_errors_still_stop_the_run(self, empty, embedder, fake):
+        fake.fail_next = [401]
+        with pytest.raises(LlmError, match="401"):
+            run_ingest(CHUNKS, embedder, rate_limit_wait_s=0)
 
     def test_tsv_includes_the_life_name(self, empty, embedder):
         run_ingest(CHUNKS[:1], embedder)
