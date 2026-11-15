@@ -103,7 +103,8 @@ scores can't be compared with each other, so hybrid search combines them by rank
 
 ### Spike results (Neon test branch, 2026-11-15)
 
-Run with `uv run --env-file .env.test python -m scripts.neon_spike --fake-embeddings`.
+Run with `uv run --env-file .env.test python -m scripts.neon_spike` (Voyage
+embeddings; needs `VOYAGE_API_KEY`) or with `--fake-embeddings` (no key).
 
 - Neon Postgres 18.7 offers `vector` 0.8.7 and `lakebase_text` 0.1.3. Both
   install with the owner login, through the normal migration runner.
@@ -117,6 +118,12 @@ Run with `uv run --env-file .env.test python -m scripts.neon_spike --fake-embedd
   whichever plan runs.
 - BM25 told the near-miss passages apart: "Opimius Aventine" ranked Caius
   Gracchus first, "Utica" ranked Cato the Younger first and returned nothing else.
+- **Real embeddings (voyage-3.5) rank the near-miss brothers correctly, but
+  barely.** For "Which brother was killed on the Capitol by the senators?":
+  Tiberius Gracchus 0.5505, Caius Gracchus 0.5597 (cosine distance), a gap
+  under 0.01. This is the case the project is built around: BM25 on exact
+  names, and the cache's name check, have to cover what vector search alone
+  can't separate. Seven short texts cost 241 tokens, $0.000014.
 - BM25 statistics refresh at `VACUUM`; the ingest login has `MAINTAIN` on
   `chunks`, so a load can vacuum without the owner login.
 - Use the **direct** connection string for `DATABASE_URL` (no `-pooler` in the
