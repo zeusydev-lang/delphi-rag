@@ -3,7 +3,7 @@
 #                               wrangler secret put TURNSTILE_SECRET
 name = "delphi-api"
 main = "src/index.ts"
-compatibility_date = "2026-11-01"
+compatibility_date = "2026-10-01"
 
 [vars]
 # Set API_URL to the Cloud Run service URL after the first deploy.

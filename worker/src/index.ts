@@ -22,7 +22,7 @@ export interface Env {
   SITE: RateLimit;
 }
 
-export const MAX_QUESTION_CHARS = 300;
+const MAX_QUESTION_CHARS = 300;  // not exported: the runtime treats named exports as handlers
 const TURNSTILE_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 
 function allowedOrigin(request: Request, env: Env): string | null {
