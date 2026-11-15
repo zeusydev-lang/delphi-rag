@@ -1,0 +1,898 @@
+{
+  "prompt_version": "a1",
+  "search_version": "rrf-v1",
+  "corpus_version": "lives-v1",
+  "model": "anthropic/claude-haiku-5-5",
+  "measured_at": "2026-11-15T19:59:15+00:00",
+  "questions": 38,
+  "errors": 0,
+  "cost_usd": 0.021936,
+  "rates": {
+    "answered": 0.939,
+    "cites_expected": 0.909,
+    "right_life": 0.97,
+    "declined": 1.0,
+    "sent_back_once": 0.053,
+    "avg_seconds": 2.59
+  },
+  "by_category": {
+    "named": {
+      "answered": 1.0,
+      "cites_expected": 1.0,
+      "right_life": 1.0
+    },
+    "near_miss": {
+      "answered": 0.923,
+      "cites_expected": 0.923,
+      "right_life": 1.0
+    },
+    "paraphrase": {
+      "answered": 1.0,
+      "cites_expected": 0.875,
+      "right_life": 1.0
+    },
+    "shared": {
+      "answered": 0.75,
+      "cites_expected": 0.75,
+      "right_life": 0.75
+    }
+  },
+  "results": [
+    {
+      "id": "nm01",
+      "category": "near_miss",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.48,
+      "cost_usd": 0.0006002000000000001,
+      "answer": "Tiberius Gracchus (not Caius) was beaten to death. In the tumult led by Nasica, Tiberius fled but was struck down and killed, with the first blow from Publius Satureius using the foot of a stool and the second claimed by Lucius Rufus; more than three hundred were killed by clubs and staves. Caius Gracchus is mentioned only as Tiberius's brother who lamented his death.",
+      "citations": [
+        [
+          "Tiberius Gracchus",
+          24,
+          "Publius Satureius, a tribune, one of his colleagues, was observed to give him the first fatal stroke, by hitting him upon the head with the foot of a stool"
+        ],
+        [
+          "Tiberius Gracchus",
+          24,
+          "killed by clubs and staves only, none by an iron weapon"
+        ],
+        [
+          "Caius Gracchus",
+          5,
+          "the passion with which he still lamented his brother's death"
+        ]
+      ]
+    },
+    {
+      "id": "nm02",
+      "category": "near_miss",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.74,
+      "cost_usd": 0.000531,
+      "answer": "Tiberius Gracchus was killed on the Capitol. Nasica led a group to the Capitol to attack him, and he fled and was struck down, with Publius Satureius giving the first fatal blow (the passage says he was \"stopped\" and fell; he was killed by clubs and staves). Caius Gracchus was not killed there; the passages only say he was later slain, not where.",
+      "citations": [
+        [
+          "Tiberius Gracchus",
+          24,
+          "Tiberius tried to save himself by flight."
+        ],
+        [
+          "Tiberius Gracchus",
+          24,
+          "Publius Satureius, a tribune, one of his colleagues, was observed to give him the first fatal stroke"
+        ],
+        [
+          "Tiberius Gracchus",
+          24,
+          "those who bore him company"
+        ],
+        [
+          "Caius Gracchus",
+          1,
+          "he was not yet thirty when he was slain."
+        ]
+      ]
+    },
+    {
+      "id": "nm03",
+      "category": "near_miss",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.21,
+      "cost_usd": 0.0005101,
+      "answer": "Caius Gracchus (not Tiberius) hid in a little grove consecrated to the Furies before he was killed. His servant Philocrates first slew him there, and then killed himself. Passage P1 describes this, though it notes that some say they were taken alive.",
+      "citations": [
+        [
+          "Caius Gracchus",
+          23,
+          "he had still time enough to hide himself in a little grove, consecrated to the Furies"
+        ],
+        [
+          "Caius Gracchus",
+          23,
+          "his servant Philocrates having first slain him, presently afterwards killed himself also"
+        ]
+      ]
+    },
+    {
+      "id": "nm04",
+      "category": "near_miss",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 1.98,
+      "cost_usd": 0.0005574000000000001,
+      "answer": "Tiberius Gracchus (not Caius Gracchus) had his fellow tribune Marcus Octavius deprived of his tribuneship. After Octavius refused to yield, Tiberius put the question of Octavius's deposition to the people, and the law was voted, with Tiberius's freedman removing Octavius from the rostra.",
+      "citations": [
+        [
+          "Tiberius Gracchus",
+          17,
+          "proposed to deprive Octavius of his tribuneship"
+        ],
+        [
+          "Tiberius Gracchus",
+          18,
+          "The law for his deprivation being thus voted, Tiberius ordered one of his servants"
+        ]
+      ]
+    },
+    {
+      "id": "nm05",
+      "category": "near_miss",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 1.99,
+      "cost_usd": 0.0005231,
+      "answer": "Caius Gracchus passed the law lowering the price of corn for the poor. Passage P1 lists among his proposed laws \"a fourth related to the price of corn, which was to be sold at a lower rate than formerly to the poor.\" (Tiberius Gracchus is not credited with this measure in the passages.)",
+      "citations": [
+        [
+          "Caius Gracchus",
+          8,
+          "a fourth related to the price of corn, which was to be sold at a lower rate than formerly to the poor"
+        ]
+      ]
+    },
+    {
+      "id": "nm06",
+      "category": "near_miss",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.53,
+      "cost_usd": 0.0005721,
+      "answer": "The passages say Tiberius Gracchus's body was thrown into the river with the other corpses after he was killed; his own brother, Caius Gracchus, had begged to bury him at night but was refused. Caius Gracchus's own body was also thrown into the river with the other slain, after his head had been cut off (Caius Gracchus, not Cato, is the subject here).",
+      "citations": [
+        [
+          "Tiberius Gracchus",
+          25,
+          "they would not suffer his own brother, though he earnestly begged the favor, to bury him in the night, but threw him, together with the other corpses, into the river"
+        ],
+        [
+          "Caius Gracchus",
+          24,
+          "The bodies of these two persons, as well as of the rest who were slain, to the number of three thousand men, were all thrown into the river"
+        ]
+      ]
+    },
+    {
+      "id": "nm07",
+      "category": "near_miss",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.62,
+      "cost_usd": 0.0005949000000000001,
+      "answer": "After Caius was killed, his head was carried off by one of his murderers, Septimuleius, but Opimius's friend met him and forced it from him. Septimuleius had impaled the head on his spear and presented it to Opimius, who had offered its weight in gold as a reward. The scales showed it weighed above seventeen pounds, but Septimuleius had removed the brains and filled the skull with lead to increase the weight.",
+      "citations": [
+        [
+          "Caius Gracchus",
+          24,
+          "they had made proclamation, that whoever should bring the head either of Caius or Fulvius, should, as a reward, receive its weight in gold"
+        ],
+        [
+          "Caius Gracchus",
+          24,
+          "Septimuleius, therefore, having fixed Caius's head upon the top of his spear, came and presented it to Opimius"
+        ],
+        [
+          "Caius Gracchus",
+          24,
+          "for having taken out the brains, he had filled the skull with lead"
+        ]
+      ]
+    },
+    {
+      "id": "nm08",
+      "category": "near_miss",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.22,
+      "cost_usd": 0.0005889000000000001,
+      "answer": "It was Cato the Elder (Marcus Cato, the Censor). Passage P1 says that after the African figs, \"he never after this gave his opinion, but at the end he would be sure to come out with this sentence, 'Also, Carthage, methinks, ought utterly to be destroyed.'\" This is not Cato the Younger, who appears in P2 and P5 in other roles.",
+      "citations": [
+        [
+          "Cato the Elder",
+          35,
+          "Also, Carthage, methinks, ought utterly to be destroyed."
+        ]
+      ]
+    },
+    {
+      "id": "nm09",
+      "category": "near_miss",
+      "answered": false,
+      "cites_expected": false,
+      "right_life": true,
+      "calls": 2,
+      "seconds": 3.84,
+      "cost_usd": 0.0009620000000000001,
+      "answer": "The passages do not describe the manner of Cato the Younger's death at Utica. They show that Caesar was told Cato stayed at Utica without seeking to flee (P5), that Cato had long resolved on his own death though he did not let it appear (P4), and that Caesar, on hearing of his death, said \"Cato, I grudge you your death\" (P5). The method itself is not stated in these passages.",
+      "citations": [
+        [
+          "Cato the Younger",
+          82,
+          "he had determined to die, though he did not let it appear"
+        ],
+        [
+          "Cato the Younger",
+          95,
+          "Cato, I grudge you your death"
+        ]
+      ]
+    },
+    {
+      "id": "nm10",
+      "category": "near_miss",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.84,
+      "cost_usd": 0.00042310000000000004,
+      "answer": "Cato the Younger (Cato of Utica) read Plato's dialogue concerning the soul on the night he died, as described in the Life of Cato the Younger. The Life of Cato the Elder (the Censor) does not describe this episode.",
+      "citations": [
+        [
+          "Cato the Younger",
+          89,
+          "he took into his hand Plato's dialogue concerning the soul"
+        ]
+      ]
+    },
+    {
+      "id": "nm11",
+      "category": "near_miss",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 3.69,
+      "cost_usd": 0.00044770000000000004,
+      "answer": "Cato the Younger (Cato of Utica) studied with Antipater the Tyrian, the Stoic philosopher. The passage says that, having gained his intimate acquaintance, he devoted himself to the study of moral and political doctrine. This is not Cato the Elder, who in Plutarch's account studied with a Pythagorean, Nearchus.",
+      "citations": [
+        [
+          "Cato the Younger",
+          8,
+          "Having gained the intimate acquaintance of Antipater the Tyrian, the Stoic philosopher, he devoted himself to the study, above everything, of moral and political doctrine."
+        ]
+      ]
+    },
+    {
+      "id": "nm12",
+      "category": "near_miss",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.19,
+      "cost_usd": 0.0005147999999999999,
+      "answer": "Cato the Elder (Marcus Cato, the Censor) sold his slaves when they grew old. In P2 he is said to have thought that slaves \"ought to be sold again, when they grew old, and no useless servants fed in a house.\" The passage refers to his own practice, so this is Cato the Elder, not Cato the Younger.",
+      "citations": [
+        [
+          "Cato the Elder",
+          7,
+          "these he thought ought to be sold again, when they grew old, and no useless servants fed in a house"
+        ]
+      ]
+    },
+    {
+      "id": "nm13",
+      "category": "near_miss",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.44,
+      "cost_usd": 0.0005782999999999999,
+      "answer": "The censorship that pleased the people enough to earn a statue was that of Cato the Elder (Marcus Cato, the Censor), not Cato the Younger. The people set up his statue in the temple of the goddess of Health, with an inscription describing him as the censor who, by his good discipline and wise ordinances, reclaimed the Roman commonwealth when it was declining into vice.",
+      "citations": [
+        [
+          "Cato the Elder",
+          24,
+          "the people, it seems, liked his censorship wondrously well; for, setting up a statue for him in the temple of the goddess of Health"
+        ],
+        [
+          "Cato the Elder",
+          24,
+          "this was Cato the Censor, who, by his good discipline and wise and temperate ordinances, reclaimed the Roman commonwealth when it was declining and sinking down into vice"
+        ]
+      ]
+    },
+    {
+      "id": "n01",
+      "category": "named",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 3.23,
+      "cost_usd": 0.0006956,
+      "answer": "Crassus defeated Spartacus in a pitched battle that he forced by encamping close to the enemy and building lines of circumvallation; the slaves sallied out and attacked his pioneers, and fighting broke out as reinforcements came in on both sides. Spartacus set his army in array, killed his own horse, and made straight for Crassus, but he was surrounded and cut to pieces after his followers deserted him. Plutarch notes that Pompey claimed much of the credit, since he slew many fugitives and wrote to the senate that Crassus had beaten the slaves in battle but that he himself had ended the war (Crassus, P1). Earlier, Crassus had also used a wall across the isthmus at Rhegium to keep Spartacus's army from forage and idleness (P3).",
+      "citations": [
+        [
+          "Crassus",
+          11,
+          "Crassus, therefore, eager to fight a decisive battle, encamped very near the enemy, and began to make lines of circumvallation"
+        ],
+        [
+          "Crassus",
+          11,
+          "At last being deserted by those that were about him, he himself stood his ground, and, surrounded by the enemy, bravely defending himself, was cut in pieces."
+        ],
+        [
+          "Crassus",
+          11,
+          "Crassus indeed had vanquished the slaves in a pitched battle, but that he had put an end to the war"
+        ],
+        [
+          "Crassus",
+          10,
+          "he set to work to build a wall across the isthmus; thus keeping his soldiers at once from idleness, and his foes from forage."
+        ]
+      ]
+    },
+    {
+      "id": "n02",
+      "category": "named",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.37,
+      "cost_usd": 0.0005721,
+      "answer": "Surena sent the head and hand of Crassus to the king Hyrodes in Armenia. Meanwhile he spread a report that he was bringing Crassus alive to Seleucia, and staged a mocking procession with a man dressed as Crassus. (The head was later brought to Hyrodes's court during a feast, where it was thrown into the company and used as a prop in a performance of the Bacchae.)",
+      "citations": [
+        [
+          "Crassus",
+          31,
+          "Surena sent the head and hand of Crassus to Hyrodes, the king, into Armenia"
+        ],
+        [
+          "Crassus",
+          31,
+          "himself by his messengers scattering a report that he was bringing Crassus alive to Seleucia"
+        ],
+        [
+          "Crassus",
+          32,
+          "Sillaces coming to the room, and having made obeisance to the king, threw down the head of Crassus into the midst of the company"
+        ]
+      ]
+    },
+    {
+      "id": "n03",
+      "category": "named",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.54,
+      "cost_usd": 0.000529,
+      "answer": "When Caesar reached the Rubicon, which divided his province from the rest of Italy, he halted and deliberated at length, weighing the enterprise before him. He then crossed, saying the words \"the die is cast,\" and marched his army through to Ariminum, which he took before daybreak. (Caesar here is Julius Caesar, not any other figure of the name.)",
+      "citations": [
+        [
+          "Caesar",
+          31,
+          "He checked his course, and ordered a halt, while he revolved with himself"
+        ],
+        [
+          "Caesar",
+          31,
+          "with these words he took the river"
+        ],
+        [
+          "Caesar",
+          31,
+          "before it was day reached Ariminum, and took it"
+        ],
+        [
+          "Pompey",
+          78,
+          "led his army through it"
+        ]
+      ]
+    },
+    {
+      "id": "n04",
+      "category": "named",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 2,
+      "seconds": 3.16,
+      "cost_usd": 0.0011336000000000002,
+      "answer": "The pirates first demanded twenty talents for Caesar's ransom. Caesar laughed at them for not understanding his value and offered to pay fifty instead. (This concerns Julius Caesar, in the Life of Caesar.)",
+      "citations": [
+        [
+          "Caesar",
+          2,
+          "for his ransom, he laughed at them for not understanding the value of their prisoner"
+        ],
+        [
+          "Caesar",
+          2,
+          "voluntarily engaged to give them fifty"
+        ]
+      ]
+    },
+    {
+      "id": "n05",
+      "category": "named",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.4,
+      "cost_usd": 0.0005727999999999999,
+      "answer": "According to Plutarch's Life of Pompey, Pompey cleared the seas near Rome, the Tyrrhenian, African, and the waters of Sardinia, Corsica, and Sicily in forty days, through his own industry and that of his lieutenants. He then proceeded in person against the pirates who had fled to Cilicia. The passage gives the forty-day period only for the initial clearing, not for the full campaign.",
+      "citations": [
+        [
+          "Pompey",
+          30,
+          "all which he performed in the space of forty days"
+        ]
+      ]
+    },
+    {
+      "id": "n06",
+      "category": "named",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 3.29,
+      "cost_usd": 0.0005309000000000001,
+      "answer": "The passages name Casca as the first to strike Caesar: Caesar cried out \"Vile Casca, what does this mean?\" as the first blow landed, and the striker is the one who spoke in Greek to his brother. Brutus is said to have given Caesar one stab in the groin, but only after that first onset. The passages do not name the striker explicitly by a separate identification beyond this, so the attribution to Casca rests on Caesar's cry in Latin.",
+      "citations": [
+        [
+          "Caesar",
+          67,
+          "\"Vile Casca, what does this mean?\""
+        ],
+        [
+          "Caesar",
+          67,
+          "for which reason Brutus also gave him one stab in the groin"
+        ]
+      ]
+    },
+    {
+      "id": "n07",
+      "category": "named",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.87,
+      "cost_usd": 0.0006491,
+      "answer": "According to Plutarch's Life of Crassus, Crassus built his fortune largely through exploiting public misfortune. During Sylla's proscriptions he accepted or bought the goods of the slain, and he assembled over five hundred slave builders and architects so he could buy burning or endangered houses cheaply, until much of Rome came into his hands. Plutarch notes he got most of his wealth \"by fire and rapine, making his advantages of the public calamities,\" though he also gave generously from his estate in other ways.",
+      "citations": [
+        [
+          "Crassus",
+          2,
+          "most of which, if we may scandal him with a truth, he got by fire and rapine, making his advantages of the public calamities"
+        ],
+        [
+          "Crassus",
+          2,
+          "Crassus never was the man that refused to accept, or give money for them"
+        ],
+        [
+          "Crassus",
+          2,
+          "he bought slaves that were builders and architects, and when he had collected these to the number of more than five hundred, he made it his practice to buy houses that were on fire"
+        ],
+        [
+          "Crassus",
+          2,
+          "so that the greatest part of Rome, at one time or other, came into his hands"
+        ]
+      ]
+    },
+    {
+      "id": "n08",
+      "category": "named",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 3.08,
+      "cost_usd": 0.0005984000000000001,
+      "answer": "After Pompey was killed in Egypt, his head was cut off and the rest of his body was thrown overboard and left naked on the shore to be viewed by anyone curious. His freedman Philip washed the body with sea-water, wrapped it in his own shirt, and used rotten planks from a small fishing boat to build a funeral pile, on which the body was burned in obsequies (with an old Roman veteran helping). (This refers to Pompey the Great, not Cato.)",
+      "citations": [
+        [
+          "Pompey",
+          106,
+          "they cut off Pompey's head, and threw the rest of his body overboard, leaving it naked upon the shore"
+        ],
+        [
+          "Pompey",
+          106,
+          "he wrapped it up in a shirt of his own for a winding-sheet"
+        ],
+        [
+          "Pompey",
+          106,
+          "he found some rotten planks of a little fisher-boat"
+        ]
+      ]
+    },
+    {
+      "id": "p01",
+      "category": "paraphrase",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 1.95,
+      "cost_usd": 0.0005667000000000001,
+      "answer": "The young Roman was Caesar (Julius Caesar, the subject of the Life of Caesar). When the pirates first demanded twenty talents for his ransom, he laughed at them for not understanding the value of their prisoner, and offered fifty instead.",
+      "citations": [
+        [
+          "Caesar",
+          2,
+          "he laughed at them for not understanding the value of their prisoner, and voluntarily engaged to give them fifty"
+        ],
+        [
+          "Caesar",
+          1,
+          "he was taken near the island Pharmacusa by some of the pirates"
+        ]
+      ]
+    },
+    {
+      "id": "p02",
+      "category": "paraphrase",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.98,
+      "cost_usd": 0.0006799000000000001,
+      "answer": "The passages present Tiberius Gracchus's land reform as a response to the poor being dispossessed: rich men got public land back under other names and drove out the poor, who then lost their readiness to serve in war and their care for their children's education. Tiberius was moved by the people themselves, who posted writings calling on him to restore the poor citizens to their former possessions, and his brother Caius reported that Tiberius was struck by the depopulation of Tuscany, with only imported slaves working the land. Plutarch also names Diophanes and Blossius as instigators, though he notes other accounts blame his mother or Spurius Postumius.",
+      "citations": [
+        [
+          "Tiberius Gracchus",
+          12,
+          "The poor, who were thus deprived of their farms, were no longer either ready, as they had formerly been, to serve in war, or careful in the education of their children"
+        ],
+        [
+          "Tiberius Gracchus",
+          13,
+          "the people themselves chiefly excited his zeal and determination in the prosecution of it, by setting up writings upon the porches, walls, and monuments, calling upon him to reinstate the poor citizens in their former possessions"
+        ],
+        [
+          "Tiberius Gracchus",
+          13,
+          "there being hardly any free husbandmen or shepherds, but for the most part only barbarian, imported slaves"
+        ]
+      ]
+    },
+    {
+      "id": "p03",
+      "category": "paraphrase",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.51,
+      "cost_usd": 0.000474,
+      "answer": "The servant was Philocrates, the servant of Caius Gracchus (not Cato the Younger or Caesar). When Caius hid in a grove consecrated to the Furies, Philocrates first slew his master and then killed himself, falling dead upon him. The passage notes that some say they were both taken alive, but the account given is that Philocrates killed Caius and then himself.",
+      "citations": [
+        [
+          "Caius Gracchus",
+          23,
+          "his servant Philocrates having first slain him, presently afterwards killed himself also, and fell dead upon his master"
+        ]
+      ]
+    },
+    {
+      "id": "p04",
+      "category": "paraphrase",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.39,
+      "cost_usd": 0.000586,
+      "answer": "Pompey did this. He divided the seas into thirteen parts under his officers and cleared the pirates, though the passage describes the clearing as taking forty days rather than a full season. The general in question is Pompey (the Great), not Caesar or Crassus.",
+      "citations": [
+        [
+          "Pompey",
+          30,
+          "Pompey in pursuance of his charge divided all the seas, and the whole Mediterranean into thirteen parts"
+        ],
+        [
+          "Pompey",
+          30,
+          "all which he performed in the space of forty days"
+        ]
+      ]
+    },
+    {
+      "id": "p05",
+      "category": "paraphrase",
+      "answered": true,
+      "cites_expected": false,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.66,
+      "cost_usd": 0.0005362,
+      "answer": "Cato the Younger (Cato of Utica) is the one who chose death over mercy from Caesar, the winner of the civil war. Caesar had hoped Cato would accept his life, and when Cato died, Caesar said he grudged him his death, since Cato had grudged him the preservation of his life.",
+      "citations": [
+        [
+          "Cato the Younger",
+          95,
+          "Cato, I grudge you your death, as you have grudged me the preservation of your life."
+        ],
+        [
+          "Cato the Younger",
+          95,
+          "if Cato would have suffered himself to owe his life to Caesar, he would not so much have impaired his own honor"
+        ]
+      ]
+    },
+    {
+      "id": "p06",
+      "category": "paraphrase",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.21,
+      "cost_usd": 0.0005934000000000001,
+      "answer": "The statesman was Cato the Elder (Marcus Cato, the Censor), not Cato the Younger. Passage P2 says that he \"never after this gave his opinion, but at the end he would be sure to come out with this sentence, 'Also, Carthage, methinks, ought utterly to be destroyed.'\" Rome's great rival city in that passage is Carthage, and Publius Scipio Nasica took the opposing view.",
+      "citations": [
+        [
+          "Cato the Elder",
+          35,
+          "he never after this gave his opinion, but at the end he would be sure to come out with this sentence, \"Also, Carthage, methinks, ought utterly to be destroyed.\""
+        ]
+      ]
+    },
+    {
+      "id": "p07",
+      "category": "paraphrase",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.21,
+      "cost_usd": 0.0004756,
+      "answer": "Cornelia, the mother of Tiberius Gracchus and Caius Gracchus, bore the loss of her two sons with a noble and undaunted spirit. (Passage P1 is about Caius Gracchus, whose mother this was; P2 confirms Cornelia was the mother of Tiberius and Caius.)",
+      "citations": [
+        [
+          "Caius Gracchus",
+          27,
+          "as Cornelia, their mother, bore the loss of her two sons with a noble and undaunted spirit"
+        ],
+        [
+          "Tiberius Gracchus",
+          2,
+          "two sons, Tiberius and Caius, whose lives we are now writing"
+        ]
+      ]
+    },
+    {
+      "id": "p08",
+      "category": "paraphrase",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.21,
+      "cost_usd": 0.0005726,
+      "answer": "Caesar reconciled Crassus and Pompey, the two most powerful men in Rome, so that by uniting their power he strengthened himself. Plutarch says this was a piece of state-policy that deceived everyone except Cato, and that Caesar used the reconciliation to gain their combined backing for his consulship.",
+      "citations": [
+        [
+          "Caesar",
+          12,
+          "This was the reconciling of Crassus and Pompey, the two men who then were most powerful in Rome."
+        ],
+        [
+          "Caesar",
+          12,
+          "by this means strengthened himself by the united power of both"
+        ],
+        [
+          "Crassus",
+          14,
+          "reconciling them by his persuasions, out of the three parties he set up one irresistible power"
+        ]
+      ]
+    },
+    {
+      "id": "sh01",
+      "category": "shared",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.89,
+      "cost_usd": 0.0005547999999999999,
+      "answer": "The passages describe the start of the battle of Pharsalia. Caius Crassianus, a centurion in Caesar's army, charged first into Pompey's ranks as he had promised Caesar, and made a great slaughter, but was run through at the mouth by one of Pompey's soldiers, after which the fight on that part of the field became doubtful and equal. Before the battle, Pompey was reluctant to fight, while his officers and cavalry were confident of victory, and Pompey's side had far greater numbers (forty-five thousand infantry against twenty-two thousand, and five thousand cavalry against one thousand). The passages do not give the final outcome of the battle.",
+      "citations": [
+        [
+          "Pompey",
+          94,
+          "one of Pompey's soldiers ran him in at the mouth, so that the point of the sword came out behind at his neck"
+        ],
+        [
+          "Pompey",
+          94,
+          "the fight became doubtful, and continued equal on that part of the battle"
+        ],
+        [
+          "Caesar",
+          41,
+          "there being forty-five thousand of Pompey's, against twenty-two thousand of the enemy"
+        ],
+        [
+          "Cato the Younger",
+          72,
+          "Ever since the battle of Pharsalia, he used to sit at table"
+        ]
+      ]
+    },
+    {
+      "id": "sh02",
+      "category": "shared",
+      "answered": false,
+      "cites_expected": false,
+      "right_life": false,
+      "calls": 1,
+      "seconds": 2.47,
+      "cost_usd": 0.0005167,
+      "answer": "The passages do not say what Pompey did after his army broke at Pharsalia. They describe the lead-up to the battle (P1), Pompey's earlier reluctance to fight, and the start of the engagement with Crassianus's charge (P5), but none narrates Pompey's conduct once his forces gave way. P3 only mentions, in general terms, Pompey's reaction to the news of the \"overthrow at Pharsalia\" through Cato's plans, not Pompey's own actions.",
+      "citations": [
+        [
+          "Cato the Younger",
+          70,
+          "When they heard of the overthrow at Pharsalia"
+        ]
+      ]
+    },
+    {
+      "id": "sh03",
+      "category": "shared",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 3.7,
+      "cost_usd": 0.0007308,
+      "answer": "During the Catiline conspiracy, Caesar argued that the conspirators should not be put to death without fair trial under law, and moved that they be kept in prison instead (Caesar's life). Cato, the Younger, opposed him fiercely, attacking Caesar as one who would ruin the commonwealth by soft words and popular speeches, and urged that the conspirators be executed; the senate turned back to Cato's view and decreed their death (Cato the Younger's life). Plutarch's Life of Caesar confirms that Cato pressed the matter so strongly that the criminals were given up to execution.",
+      "citations": [
+        [
+          "Cato the Younger",
+          33,
+          "he made a very merciful and persuasive speech, that they ought not to suffer death without fair trial according to law, and moved that they might be kept in prison"
+        ],
+        [
+          "Cato the Younger",
+          33,
+          "who would, he said, ruin the commonwealth by soft words and popular speeches"
+        ],
+        [
+          "Cato the Younger",
+          33,
+          "it was decreed the conspirators should be put to death"
+        ],
+        [
+          "Caesar",
+          8,
+          "Cato intimated in his speech the suspicion of Caesar himself, and pressed the matter so strongly, that the criminals were given up to suffer execution"
+        ]
+      ]
+    },
+    {
+      "id": "sh04",
+      "category": "shared",
+      "answered": true,
+      "cites_expected": true,
+      "right_life": true,
+      "calls": 1,
+      "seconds": 2.81,
+      "cost_usd": 0.0005623,
+      "answer": "Caesar's first consulship was won with the backing of Crassus and Pompey. Plutarch says that Caesar, \"doubly supported by the interests of Crassus and Pompey, was promoted to the consulship.\" He had reconciled the two men, who were then the most powerful in Rome, and after his return he gained their support so he could seek the office without giving up his triumph, which Cato had blocked.",
+      "citations": [
+        [
+          "Caesar",
+          13,
+          "Caesar being doubly supported by the interests of Crassus and Pompey, was promoted to the consulship"
+        ],
+        [
+          "Caesar",
+          12,
+          "This was the reconciling of Crassus and Pompey, the two men who then were most powerful in Rome."
+        ]
+      ]
+    },
+    {
+      "id": "u01",
+      "category": "unanswerable",
+      "declined": true,
+      "calls": 1,
+      "seconds": 2.08,
+      "cost_usd": 0.000431,
+      "answer": "The passages provided do not answer this question. They cover Cato the Elder, Tiberius Gracchus, and Cato the Younger, and none of them mention Solon or the laws he gave the Athenians.",
+      "citations": []
+    },
+    {
+      "id": "u02",
+      "category": "unanswerable",
+      "declined": true,
+      "calls": 1,
+      "seconds": 3.05,
+      "cost_usd": 0.000509,
+      "answer": "The passages do not describe the battle of the Granicus. They cover Pompey's campaigns against the Albanians and Iberians (P1, P4), Pompey and Caesar's standoff in Greece (P2), a battle against the Nervii-like tribe in which Caesar nearly lost his army (P3), and omens at Pharsalus-era Caesar's victory (P5), but none mention the Granicus.",
+      "citations": []
+    },
+    {
+      "id": "u03",
+      "category": "unanswerable",
+      "declined": true,
+      "calls": 1,
+      "seconds": 1.91,
+      "cost_usd": 0.0005052,
+      "answer": "The passages provided do not answer this question. None of them mention Lycurgus or the Spartans' common meals; they cover Tiberius Gracchus's land laws, Cato the Younger's habits, Caius Gracchus's politics, and Cato the Elder's censorship, so I cannot say what Lycurgus decided.",
+      "citations": []
+    },
+    {
+      "id": "u04",
+      "category": "unanswerable",
+      "declined": true,
+      "calls": 1,
+      "seconds": 2.06,
+      "cost_usd": 0.000415,
+      "answer": "The passages do not describe how Cicero died. They mention Cicero's conduct during Caesar's trial and his role as consul in the Catiline affair, but say nothing about his death.",
+      "citations": []
+    },
+    {
+      "id": "u05",
+      "category": "unanswerable",
+      "declined": true,
+      "calls": 1,
+      "seconds": 1.65,
+      "cost_usd": 0.0005127,
+      "answer": "The passages provided do not answer this question. They cover Surena and Crassus, Caesar in Africa, Crassus's flight, and Pompey and Stratonice, but none mention Alexander the Great or his horse.",
+      "citations": []
+    }
+  ],
+  "labels": "2",
+  "rescored_at": "2026-11-15T20:00:51+00:00"
+}

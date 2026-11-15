@@ -6,7 +6,10 @@ checks each answer in code (no judge model):
 
   answered       the model gave an answer (answerable=true)
   cites_expected at least one citation is from an expected section
-  right_life     every citation is from the answer's Life or an expected section
+  right_life     the first (main) citation is from the answer's Life or an
+                 expected section: the near-miss measure. Later citations may
+                 come from other Lives that retell the event or tell the
+                 brothers apart; that's fine and isn't counted against it.
   declined       for unanswerable questions: answerable=false
   calls          answer-model calls (2 means the citation check sent it back once)
 
@@ -16,6 +19,7 @@ this can't tell is whether the answer is *correct*; that needs a judge.
 Usage (dev, .env; about $0.02 a run):
     uv run python -m scripts.answer_eval
     uv run python -m scripts.answer_eval --compare
+    uv run python -m scripts.answer_eval --rescore   # re-check saved answers, no API calls
 """
 
 import argparse
@@ -64,14 +68,20 @@ class CountingClient(LlmClient):
 # --- Checks (pure) ---------------------------------------------------------------
 
 
+def check_citations(q: Question, answered: bool, cited: list[tuple[str, int]]) -> dict:
+    expected = q.expected_sections
+    main = cited[0] if cited else None
+    return {
+        "answered": answered,
+        "cites_expected": any(s in expected for s in cited),
+        "right_life": main is not None
+        and (main in expected or main[0] in q.answer_lives),
+    }
+
+
 def check_answer(q: Question, result: AnswerResult) -> dict:
     cited = [(c.life, c.section) for c in result.citations]
-    expected = q.expected_sections
-    return {
-        "answered": result.answerable,
-        "cites_expected": any(s in expected for s in cited),
-        "right_life": all(s in expected or s[0] in q.answer_lives for s in cited),
-    }
+    return check_citations(q, result.answerable, cited)
 
 
 def check_decline(result: AnswerResult) -> dict:
@@ -130,6 +140,22 @@ async def run_eval() -> dict:
         flags = " ".join(k for k, v in checks.items() if not v)
         print(f"  {item.id:<5} {'ok' if not flags else 'MISS ' + flags}")
 
+    return {
+        "prompt_version": PROMPT_VERSION,
+        "search_version": SEARCH_VERSION,
+        "corpus_version": evalset.corpus_version,
+        "labels": evalset.labels,
+        "model": CountingClient().model,
+        "measured_at": datetime.now(UTC).isoformat(timespec="seconds"),
+        "questions": len(rows),
+        "errors": sum("error" in r for r in rows),
+        "cost_usd": round(total.cost_usd or 0, 6),
+        **summarise(rows),
+        "results": rows,
+    }
+
+
+def summarise(rows: list[dict]) -> dict:
     answerable = [
         r for r in rows if r["category"] != "unanswerable" and "error" not in r
     ]
@@ -144,14 +170,6 @@ async def run_eval() -> dict:
             k: rate(mine, k) for k in ("answered", "cites_expected", "right_life")
         }
     return {
-        "prompt_version": PROMPT_VERSION,
-        "search_version": SEARCH_VERSION,
-        "corpus_version": evalset.corpus_version,
-        "model": CountingClient().model,
-        "measured_at": datetime.now(UTC).isoformat(timespec="seconds"),
-        "questions": len(rows),
-        "errors": sum("error" in r for r in rows),
-        "cost_usd": round(total.cost_usd or 0, 6),
         "rates": {
             "answered": rate(answerable, "answered"),
             "cites_expected": rate(answerable, "cites_expected"),
@@ -163,8 +181,24 @@ async def run_eval() -> dict:
             else 0,
         },
         "by_category": by_category,
-        "results": rows,
     }
+
+
+def rescore(path: Path) -> dict:
+    """Re-check saved answers against the current labels. No API calls."""
+    report = json.loads(path.read_text(encoding="utf-8"))
+    evalset = load_eval()
+    by_id = {q.id: q for q in evalset.questions}
+    for row in report["results"]:
+        q = by_id.get(row["id"])
+        if q is None or "error" in row:
+            continue
+        cited = [(life, section) for life, section, _ in row["citations"]]
+        row |= check_citations(q, row["answered"], cited)
+    report |= summarise(report["results"])
+    report["labels"] = evalset.labels
+    report["rescored_at"] = datetime.now(UTC).isoformat(timespec="seconds")
+    return report
 
 
 def compare() -> int:
@@ -193,11 +227,17 @@ async def main() -> int:
     parser.add_argument(
         "--compare", action="store_true", help="table of saved versions"
     )
+    parser.add_argument(
+        "--rescore",
+        action="store_true",
+        help="re-check the saved results for this prompt version; no API calls",
+    )
     args = parser.parse_args()
     if args.compare:
         return compare()
 
-    report = await run_eval()
+    out = RESULTS_DIR / f"{PROMPT_VERSION}.json"
+    report = rescore(out) if args.rescore else await run_eval()
     print(
         f"\nPrompt {report['prompt_version']}, search {report['search_version']}, "
         f"{report['model']}: {report['questions']} questions, {report['errors']} errors"
@@ -211,7 +251,6 @@ async def main() -> int:
             f"/ {r['right_life']:.2f}"
         )
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    out = RESULTS_DIR / f"{PROMPT_VERSION}.json"
     out.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(f"\nSaved {out.relative_to(ROOT)}  (total ${report['cost_usd']:.4f})")
     return 0
