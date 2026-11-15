@@ -1,0 +1,76 @@
+{
+  "about": "Held-out cache pairs, written 2026-11-15 BEFORE judge prompt j2, to check that a fix for nm08 generalises rather than memorising it. Never use these to tune the gate; add new held-out pairs for each future fix.",
+  "labels": "1",
+  "pairs": [
+    {
+      "id": "h01",
+      "kind": "near_miss",
+      "same": false,
+      "a": "What did Caesar give the pirates?",
+      "b": "What did the pirates give Caesar?"
+    },
+    {
+      "id": "h02",
+      "kind": "near_miss",
+      "same": false,
+      "a": "Who did Pompey marry after Julia died?",
+      "b": "Who did Pompey marry before Julia?"
+    },
+    {
+      "id": "h03",
+      "kind": "near_miss",
+      "same": false,
+      "a": "What did Cato the Younger refuse from Caesar?",
+      "b": "What did Cato the Younger ask from Caesar?"
+    },
+    {
+      "id": "h04",
+      "kind": "near_miss",
+      "same": false,
+      "a": "Why did the senators oppose Tiberius Gracchus?",
+      "b": "Why did the common people support Tiberius Gracchus?"
+    },
+    {
+      "id": "h05",
+      "kind": "near_miss",
+      "same": false,
+      "a": "What did Caesar do before crossing the Rubicon?",
+      "b": "What did Caesar do after crossing the Rubicon?"
+    },
+    {
+      "id": "h06",
+      "kind": "near_miss",
+      "same": false,
+      "a": "How did Pompey's soldiers feel before Pharsalia?",
+      "b": "How did Caesar's soldiers feel before Pharsalia?"
+    },
+    {
+      "id": "h07",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "Why was Crassus called the richest man in Rome?",
+      "b": "What made Crassus the wealthiest man in Rome?"
+    },
+    {
+      "id": "h08",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "How did Caesar escape from the pirates?",
+      "b": "How did Caesar get free of the pirates who captured him?"
+    },
+    {
+      "id": "h09",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "What did Cornelia say about her sons?",
+      "b": "What did Cornelia tell people about her sons?"
+    },
+    {
+      "id": "h10",
+      "kind": "paraphrase",
+      "same": true,
+      "a": "Where did Pompey die?",
+      "b": "In which place was Pompey killed?"
+    }
+  ]
+}
