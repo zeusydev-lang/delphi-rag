@@ -26,10 +26,11 @@ from core.signature import signature
 
 
 class CachedAnswer(BaseModel):
-    result: AnswerResult
+    result: AnswerResult | None  # None only in cache-only mode with no clear hit
     decision: CacheDecision | None  # None: the cache was empty or skipped
     matched_question: str | None = None
     usage: LlmUsage
+    cache_only_miss: bool = False  # cache-only mode and nothing safe to serve
 
 
 async def answer_with_cache(
@@ -42,6 +43,7 @@ async def answer_with_cache(
     corpus_version: str = CORPUS_VERSION,
     cap_usd: float | None = None,
     use_cache: bool = True,
+    cache_only: bool = False,  # over the site's cap: clear hits only, no model calls
 ) -> CachedAnswer:
     llm = llm or LlmClient()
     cap = (
@@ -81,7 +83,7 @@ async def answer_with_cache(
                 question,
                 candidate.question,
                 candidate.similarity,
-                judge=judge or judge_client(),
+                judge=None if cache_only else (judge or judge_client()),
                 usage=usage,
             )
             check_budget(usage, cap)
@@ -95,6 +97,15 @@ async def answer_with_cache(
                     usage=usage,
                 )
             matched = candidate.question
+
+    if cache_only:
+        return CachedAnswer(
+            result=None,
+            decision=decision,
+            matched_question=matched,
+            usage=usage,
+            cache_only_miss=True,
+        )
 
     result = await answer_question(
         question,

@@ -5,14 +5,17 @@ description = "Hybrid-search RAG over Plutarch's Lives with a semantic cache"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "fastapi>=0.162.4",
     "litellm>=1.109.0",
     "psycopg[binary]>=3.3.8",
     "pydantic>=2.14.3",
     "python-dotenv>=1.2.4",
+    "uvicorn>=0.54.0",
 ]
 
 [dependency-groups]
 dev = [
+    "httpx>=0.28.1",
     "pytest>=9.2.0",
     "ruff>=0.17.5",
 ]

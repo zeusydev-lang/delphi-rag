@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Delphi: Ask Plutarch</title>
+  <meta name="description" content="Ask questions about Plutarch's Lives. Every answer quotes the passages it came from, word for word.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%E2%9A%96%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/config.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+</head>
+<body>
+  <a class="skip" href="#question">Skip to the question box</a>
+
+  <header class="site">
+    <h1>Delphi <span>Ask Plutarch</span></h1>
+    <p class="lede">Ask about seven of Plutarch's <cite>Lives</cite>. Every answer quotes the passages
+      it came from, word for word, and says so when the text doesn't answer.</p>
+  </header>
+
+  <main>
+    <form id="ask" novalidate>
+      <label for="question">Your question</label>
+      <textarea id="question" name="question" rows="3" maxlength="300" required
+        aria-describedby="question-help counter"
+        placeholder="How did Tiberius Gracchus die?"></textarea>
+      <div class="form-meta">
+        <p id="question-help">Up to 300 characters. Answers come only from the seven Lives below.</p>
+        <p id="counter" aria-live="polite">0 / 300</p>
+      </div>
+
+      <div class="examples" aria-label="Example questions">
+        <span>Try:</span>
+        <button type="button" class="example">How did Tiberius Gracchus die?</button>
+        <button type="button" class="example">How did Caius Gracchus die?</button>
+        <button type="button" class="example">Which Cato said Carthage must be destroyed?</button>
+        <button type="button" class="example">How did Crassus die?</button>
+        <button type="button" class="example">How did Cicero die?</button>
+      </div>
+
+      <div id="turnstile" class="turnstile"></div>
+      <button type="submit" id="submit">Ask</button>
+    </form>
+
+    <section id="result" class="result" aria-live="polite" aria-busy="false" hidden>
+      <div class="badges" id="badges"></div>
+      <p id="answer" class="answer"></p>
+      <p id="declined" class="note" hidden>The passages found don't answer this, so Delphi doesn't
+        guess from general knowledge.</p>
+      <h2 id="sources-heading" hidden>Passages quoted</h2>
+      <ol id="citations" class="citations"></ol>
+    </section>
+
+    <p id="error" class="error" role="alert" hidden></p>
+
+    <details class="about">
+      <summary>How this works</summary>
+      <ul>
+        <li><strong>Search:</strong> your question is matched against 470 passages by meaning
+          (vector search) and by words (BM25), and the two rankings are combined.</li>
+        <li><strong>Answer:</strong> Claude Haiku 5.5 answers from the top five passages only. Every
+          quote is checked against the passage it names before you see it.</li>
+        <li><strong>Cache:</strong> a question that asks the same thing as an earlier one gets the
+          stored answer, for free. "How did <em>Caius</em> Gracchus die?" never gets Tiberius's
+          answer: names, ordinals and numbers must match before a cached answer is served.</li>
+        <li><strong>Limits:</strong> the site allows 3 questions a minute and a small daily budget.
+          After that, it answers only from the cache until the next day (UTC).</li>
+      </ul>
+      <p>Code, design decisions and measured results:
+        <a href="https://github.com/zeusydev-lang/delphi-rag">github.com/zeusydev-lang/delphi-rag</a>.</p>
+    </details>
+  </main>
+
+  <footer class="site">
+    <p>The seven Lives: Cato the Elder, Cato the Younger, Tiberius Gracchus, Caius Gracchus,
+      Caesar, Pompey and Crassus, in the Dryden translation revised by A. H. Clough
+      (<a href="https://www.gutenberg.org/ebooks/674">Project Gutenberg #674</a>).</p>
+    <p>No accounts and no cookies of our own. Questions are stored to answer repeats from the cache.</p>
+  </footer>
+</body>
+</html>

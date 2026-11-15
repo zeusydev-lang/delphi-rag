@@ -29,7 +29,12 @@ JUDGE_PROMPT_VERSION = "j2"
 DEFAULT_JUDGE_MODEL = "anthropic/claude-haiku-5-5"
 
 Outcome = Literal[
-    "hit", "miss_signature", "miss_low_similarity", "judged_same", "judged_different"
+    "hit",
+    "miss_signature",
+    "miss_low_similarity",
+    "judged_same",
+    "judged_different",
+    "gray_no_judge",  # gray zone, but no judge allowed (the site is over its cap)
 ]
 SERVES_CACHED: set[str] = {"hit", "judged_same"}
 
@@ -107,11 +112,12 @@ async def decide(
     cached_question: str,
     similarity: float,
     *,
-    judge: LlmClient,
+    judge: LlmClient | None,
     usage: LlmUsage | None = None,
     hit_at: float = HIT_AT,
     miss_below: float = MISS_BELOW,
 ) -> CacheDecision:
+    """judge=None means no model call: a gray-zone question is a miss."""
     differences = signature(new_question).differences(signature(cached_question))
     if differences:
         return CacheDecision(
@@ -121,6 +127,8 @@ async def decide(
         return CacheDecision(outcome="hit", similarity=similarity)
     if similarity < miss_below:
         return CacheDecision(outcome="miss_low_similarity", similarity=similarity)
+    if judge is None:
+        return CacheDecision(outcome="gray_no_judge", similarity=similarity)
     verdict = await judge_same(judge, new_question, cached_question, usage=usage)
     return CacheDecision(
         outcome="judged_same" if verdict.same_question else "judged_different",
