@@ -1,0 +1,26 @@
+[project]
+name = "delphi-rag"
+version = "0.1.0"
+description = "Hybrid-search RAG over Plutarch's Lives with a semantic cache"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "litellm>=1.109.0",
+    "psycopg[binary]>=3.3.8",
+    "pydantic>=2.14.3",
+    "python-dotenv>=1.2.4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.5",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+filterwarnings = [
+    # Noise from litellm's own Pydantic models, not our code.
+    "ignore:.*ReadOnly. qualifier:UserWarning",
+]
