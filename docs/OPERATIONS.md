@@ -148,6 +148,19 @@ errors stop the run, and the next run resumes where it stopped. `--fake-embeddin
 free hashed vectors under a separate version (`lives-v1-fake`), so they never
 mix with real ones.
 
+### First load (dev, 2026-11-15)
+
+- `lives-v1`: 470 chunks, 160 on a first run that hit Voyage's free-tier
+  limit and 310 on the resumed run (`--batch-size 10 --pause 62`, no 429s).
+  About 150K tokens in all; the resumed run cost $0.0066.
+- A second run: 0 new chunks, 0 tokens.
+- BM25 ranked the right Life first for "Utica", "Opimius", "Carrhae Surena"
+  and "Tiberius Octavius" (the last uses the Life's name in `tsv`).
+- **Vector search can't separate the Gracchi.** "Which brother was killed on
+  the Capitol?": Tiberius §25 at 0.5743, Caius §1 at 0.5745 (cosine
+  distance), a gap of 0.0002, 50 times closer than in the spike. Hybrid search
+  has to fix this, and its eval has to measure it.
+
 ### Changing the corpus
 
 Any change to the source file, the Lives or the chunking rules needs a new
