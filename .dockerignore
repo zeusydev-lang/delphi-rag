@@ -1,0 +1,15 @@
+# Only agent/, api/, core/ and the lock files go into the image.
+.env
+.env.*
+.git
+.github
+.venv
+data/
+evals/
+docs/
+tests/
+scripts/
+migrations/
+worker/
+web/
+**/__pycache__

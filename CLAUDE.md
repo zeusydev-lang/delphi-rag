@@ -7,6 +7,9 @@ Fusion) with a semantic answer cache. Setup and operations: docs/OPERATIONS.md.
 
 - `uv run pytest -q -rs` (database tests need `.env.test`)
 - `uv run ruff check .` and `uv run ruff format .`
+- Worker: `cd worker && npm test` and `npm run typecheck` (on Windows run vitest from an upper-case `C:\` path)
+- README results are generated: `uv run python -m scripts.eval_report --write-readme` (CI checks them)
+- Website deploys and secrets: docs/OPERATIONS.md, Website
 
 ## Conventions
 

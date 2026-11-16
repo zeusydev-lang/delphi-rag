@@ -430,3 +430,94 @@ isn't known.
 - The Voyage free tier allows 3 requests a minute: leave about a minute between
   eval runs and `scripts.ask`.
 
+## Website
+
+Live: **https://delphi-rag.delphi-rag.workers.dev**
+
+```text
+browser ── static site (web/, Cloudflare static assets: delphi-rag)
+   │  POST /api/ask {question, turnstileToken}
+   ▼
+Worker (worker/, delphi-api.delphi-rag.workers.dev)
+   1. origin must be the site     4. Turnstile token checked
+   2. 1-300 characters            5. site-wide limit: 3 a minute
+   3. per-IP limit: 5 a minute
+   │  X-Delphi-Key: <shared secret>
+   ▼
+Python API (api/app.py, Google Cloud Run: delphi-api, us-west1)
+   daily cap $0.10 (SITE_DAILY_CAP_USD) -> over it: cached answers only
+   answer_with_cache() -> Neon production branch (delphi_query login)
+```
+
+| Piece | Where | Secrets |
+|---|---|---|
+| Site | `web/`, Cloudflare Worker `delphi-rag` (static assets only) | none (Worker URL and Turnstile site key are public, in `js/config.js`) |
+| Worker | `worker/`, Cloudflare Worker `delphi-api` | `API_SHARED_SECRET`, `TURNSTILE_SECRET_KEY` (wrangler secrets) |
+| API | Cloud Run service `delphi-api`, project `delphi-rag` | `ANTHROPIC_API_KEY`, `VOYAGE_API_KEY`, `QUERY_DATABASE_URL`, `API_SHARED_SECRET` (Secret Manager) |
+| Database | Neon branch `production` (copied from `dev`) | owner URL and logins in `.env.production` |
+
+**Limits.** The Worker refuses another site's requests, empty or over-long
+questions, more than 5 questions a minute from one visitor, requests without
+a valid Turnstile token, and more than 3 a minute for the whole site (Voyage's
+free tier). Cloudflare's rate limits are approximate: in a local burst the
+site limit refused the 3rd question instead of the 4th. When one too many
+gets through, Voyage refuses the embedding and the API answers 503 "Busy, try
+again in a minute", so visitors still get a friendly message. The API checks
+the length again and enforces the daily cap: past $0.10 (UTC day) it serves
+only clear cache hits, with no judge or answer call, and otherwise answers
+`over_cap`. Two requests arriving together can both pass the cap check, so a
+day can end up to about one answer over. `daily_spend` on production counts
+fresh answers, cache hits and refusals per day.
+
+### Deploying
+
+```
+# API (Cloud Run). Secrets come from Secret Manager; refresh them from .env.production with:
+scripts/deploy_api.sh --create-secrets      # adds new versions, prints nothing secret
+scripts/deploy_api.sh                       # build and deploy (~3-5 minutes)
+
+# Worker
+cd worker && npx wrangler deploy
+printf '%s' "<value>" | npx wrangler secret put API_SHARED_SECRET   # or let wrangler prompt
+
+# Site
+cd web && npx wrangler@4.155.0 deploy
+```
+
+After any address change, update all four places: `web/js/config.js`
+(`workerUrl`), the `connect-src` in `web/_headers`, `ALLOWED_ORIGINS` in
+`worker/wrangler.toml`, and the hostname list of the Turnstile widget.
+
+**Rolling back.** API: `gcloud run services update-traffic delphi-api
+--region us-west1 --to-revisions <revision>=100` (list them with `gcloud run
+revisions list --service delphi-api --region us-west1`). Worker or site:
+`npx wrangler rollback` in its folder.
+
+**Cache-only mode, by hand:** `gcloud run services update delphi-api --region
+us-west1 --update-env-vars SITE_DAILY_CAP_USD=0`, and back with `=0.10`.
+
+### Lessons from the first deploy (2026-11-16)
+
+- **Cloud Build needs a role on new projects.** The build runs as the
+  default compute service account, which new projects no longer give broad
+  permissions; grant it `roles/run.builder` once. Cloud Run also needs
+  `roles/secretmanager.secretAccessor` on each of the four secrets.
+- **`wrangler pages project create` now creates a Worker** from the current
+  folder. Run from `worker/`, it published a copy of the API Worker under the
+  site's name (no secrets, so it could only refuse requests); deploying the
+  site under the same name replaced it. The site now deploys as a static-assets
+  Worker from `web/`, with `.assetsignore` keeping `wrangler.toml` unpublished.
+- **The pinned wrangler's runtime only supports compatibility dates up to
+  2026-10-30**, and the Workers runtime treats every named export of the entry
+  module as a handler: exporting a constant made the Worker fail at startup.
+  Both were caught by running it locally (`wrangler dev`) before deploying.
+- **The workers.dev subdomain is per account** and appears in every address;
+  it was renamed from the account's default to `delphi-rag`, after which DNS
+  took a few minutes, and Turnstile needed the new hostname.
+- **Testing the Worker locally on Windows:** vitest can fail with "failed to
+  find the runner" when the working directory's drive letter is lower case
+  (`c:\`); run it from `C:\` (PowerShell `Set-Location 'C:\...'`). CI is unaffected.
+- Turnstile only passes in a real browser, so live tests of the full path are
+  manual; the refusal paths are checked with curl, and the API directly with
+  the shared secret.
+
