@@ -7,6 +7,10 @@ passages they came from. Every citation is checked against the text, and a
 semantic cache answers repeat questions for free, without ever giving one
 question another question's answer.**
 
+**Try it: https://delphi-rag.delphi-rag.workers.dev** (3 questions a minute
+for the whole site, and a small daily budget, after which it answers only from
+the cache).
+
 ## The problem
 
 Plutarch is full of people who are easy to mix up. Tiberius and Caius Gracchus
@@ -64,6 +68,11 @@ flowchart TD
    the question, the model has to say so instead of answering from memory.
 4. **Cache:** a names/ordinals/numbers check runs first and is free, then the
    similarity thresholds, then a small judge model for the gray zone.
+5. **Website:** a static page on Cloudflare sends questions to a Cloudflare
+   Worker, which checks the origin, the length, Cloudflare Turnstile and the
+   rate limits, then calls the Python API on Google Cloud Run with a shared
+   secret. The API runs the same code the evals test, and past a $0.10 daily
+   budget it answers only from the cache.
 
 ## Results
 
@@ -189,19 +198,21 @@ Each eval's method, failures and cost are in the
   the event), then measure hybrid against vector again.
 - **The full ~52 Lives**, now that the evals work. Rare names should show
   whether BM25 earns its place.
-- **A Cloudflare frontend** (Pages plus Workers) with a daily spend cap and a
-  rate limit, as planned from the start.
 - **More held-out cache pairs** for every future change to the gate.
 
 ## Tech stack
 
 Python 3.13 · Pydantic · litellm · Claude Haiku 5.5 (answers and cache judge) ·
 Voyage embeddings · Neon Postgres with pgvector and lakebase_text (BM25) ·
-psycopg · pytest · Ruff · GitHub Actions
+psycopg · FastAPI on Google Cloud Run · Cloudflare Workers and Turnstile ·
+pytest · vitest · Ruff · GitHub Actions
 
 ## Repository layout
 
 ```text
+api/          the HTTP API behind the website (FastAPI, Cloud Run)
+worker/       the Cloudflare Worker in front of it (TypeScript)
+web/          the website (static HTML, CSS and JavaScript)
 agent/        model calls: chat, embeddings, structured output, answers, cache judge
 core/         settings, database logins, corpus chunking, search, cache, signatures, eval records
 scripts/      fetch and load the corpus, ask, the three evals, the eval report
