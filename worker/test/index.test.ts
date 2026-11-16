@@ -15,7 +15,7 @@ function env(overrides: Partial<Env> = {}): Env {
     API_URL: "https://api.example",
     ALLOWED_ORIGINS: `${ORIGIN},http://localhost:8788`,
     API_SHARED_SECRET: SECRET,
-    TURNSTILE_SECRET: "turnstile-secret",
+    TURNSTILE_SECRET_KEY: "turnstile-secret",
     PER_IP: limiter(),
     SITE: limiter(),
     ...overrides,

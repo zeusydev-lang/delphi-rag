@@ -17,3 +17,7 @@ private/
 
 # Downloaded corpus files (fetched by a script, never committed)
 data/raw/
+
+# Wrangler local cache (Cloudflare account details)
+.wrangler/
+node_modules/

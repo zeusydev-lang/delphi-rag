@@ -17,7 +17,7 @@ export interface Env {
   API_URL: string;
   ALLOWED_ORIGINS: string;
   API_SHARED_SECRET: string;
-  TURNSTILE_SECRET: string;
+  TURNSTILE_SECRET_KEY: string;
   PER_IP: RateLimit;
   SITE: RateLimit;
 }
@@ -50,7 +50,7 @@ const refuse = (message: string, status: number, origin: string | null) =>
 async function turnstileOk(token: string, ip: string, env: Env): Promise<boolean> {
   if (!token) return false;
   const form = new FormData();
-  form.append("secret", env.TURNSTILE_SECRET);
+  form.append("secret", env.TURNSTILE_SECRET_KEY);
   form.append("response", token);
   if (ip) form.append("remoteip", ip);
   try {

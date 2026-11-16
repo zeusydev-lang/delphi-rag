@@ -1,0 +1,7 @@
+# The public site: static files only, served by Cloudflare (Workers static assets).
+# Deploy from this folder: npx wrangler@4.155.0 deploy
+name = "delphi-rag"
+compatibility_date = "2026-10-01"
+
+[assets]
+directory = "."
