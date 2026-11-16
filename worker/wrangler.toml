@@ -9,7 +9,7 @@ compatibility_date = "2026-10-01"
 # Set API_URL to the Cloud Run service URL after the first deploy.
 API_URL = "https://delphi-api-782197684562.us-west1.run.app"
 # The Pages site, plus local development.
-ALLOWED_ORIGINS = "https://delphi-rag.kauvangal.workers.dev,http://localhost:8788"
+ALLOWED_ORIGINS = "https://delphi-rag.delphi-rag.workers.dev,http://localhost:8788"
 
 # 5 questions a minute per visitor.
 [[ratelimits]]
